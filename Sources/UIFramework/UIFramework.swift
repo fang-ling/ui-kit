@@ -1,8 +1,8 @@
 //
-//  Application.swift
+//  UIFramework.swift
 //  ui-framework
 //
-//  Created by Fang Ling on 2026/3/15.
+//  Created by Fang Ling on 2026/3/22.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -16,3 +16,15 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+
+import FoundationFramework
+
+@MainActor
+private var UIFramework_ViewID: UnsignedInteger32 = 0
+
+@MainActor
+func UIFramework_GetNextViewID() -> UnsignedInteger32 {
+  UIFramework_ViewID += 1
+
+  return UIFramework_ViewID
+}
