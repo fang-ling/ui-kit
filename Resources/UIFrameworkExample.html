@@ -1,0 +1,113 @@
+<!--
+//
+//  UIFrameworkExample.html
+//  ui-framework
+//
+//  Created by Fang Ling on 2026/3/22.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+  -->
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    .view {
+      position: fixed;
+      box-sizing: border-box;
+
+      /* Workaround to separate updating translate. */
+      translate: var(--translate-x, 0%) var(--translate-y, 0%);
+    }
+
+    .view-root {
+      position: fixed;
+      inset: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="module">
+    import {
+      WASI,
+      OpenFile,
+      File,
+      ConsoleStdout
+    } from "/Resources/WASIShims.js"
+    import { UIJavaScriptBridge } from "/Resources/UIJavaScriptBridge.js"
+
+    const wasi = new WASI(
+      [],
+      [],
+      [
+        new OpenFile(new File([])),
+        ConsoleStdout.lineBuffered(msg => console.log(`[WASI stdout] ${msg}`)),
+        ConsoleStdout.lineBuffered(msg => console.warn(`[WASI stderr] ${msg}`))
+      ]
+    )
+
+    const memory = new WebAssembly.Memory({
+      initial: 587,
+      maximum: 16384,
+      shared: true
+    })
+    const { instance } = await WebAssembly.instantiateStreaming(
+      fetch("/.build/release/UIFrameworkExample.wasm"),
+      {
+        wasi_snapshot_preview1: wasi.wasiImport,
+        env: {
+          memory,
+          UIJavaScriptBridge_HTMLElement_UpdateText: (id, text, textCount) => {
+            UIJavaScriptBridge.updateElementText(id, text, textCount)
+          },
+          UIJavaScriptBridge_HTMLElement_Initialize: (
+            htmlElementType,
+            id,
+            parentID
+          ) => {
+            UIJavaScriptBridge.initializeElement(htmlElementType, id, parentID)
+          },
+          UIJavaScriptBridge_HTMLElement_SetStyleProperty: (
+            id,
+            property,
+            propertyCount,
+            value,
+            valueCount
+          ) => {
+            UIJavaScriptBridge.setStyleProperty(
+              id,
+              property,
+              propertyCount,
+              value,
+              valueCount
+            )
+          },
+          UIJavaScriptBridge_HTMLElement_AddEventListener: (
+            htmlEventType,
+            id
+          ) => {
+            UIJavaScriptBridge.addEventListener(htmlEventType, id)
+          }
+        }
+      }
+    )
+    wasi.initialize(instance)
+
+    UIJavaScriptBridge.initialize(instance, memory)
+
+    instance.exports.__main_argc_argv()
+  </script>
+</body>

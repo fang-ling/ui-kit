@@ -36,6 +36,15 @@ let package = Package(
       name: "UIFramework",
       dependencies: [
         .product(name: "FoundationFramework", package: "foundation-framework")
+      ],
+      swiftSettings: [
+        .enableExperimentalFeature("Extern")
+      ]
+    ),
+    .executableTarget(
+      name: "UIFrameworkExample",
+      dependencies: [
+        "UIFramework"
       ]
     )
   ]
