@@ -30,7 +30,7 @@ public typealias ActionHandler = (Action) -> Void
   public init(
     identifier: String = String( // TODO: Use the FoundationFramework's UUID
       "com.apple.action.dynamic.\(UnsignedInteger64.random(in: 0 ..< .max)))"
-    )!,
+    ),
     handler: @escaping ActionHandler
   ) {
     self.identifier = identifier

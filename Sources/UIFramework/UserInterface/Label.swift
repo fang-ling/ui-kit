@@ -45,7 +45,11 @@ import FoundationFramework
     }
 
     if let id, let text {
-      UIJavaScriptBridge.HTMLElement.updateText(id, text.characters, text.count)
+      UIJavaScriptBridge.HTMLElement.updateText(
+        id,
+        text.charactersView,
+        text.count
+      )
     }
 
     needsDisplay = false

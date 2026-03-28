@@ -51,7 +51,7 @@ import FoundationFramework
     if let id, let title {
       UIJavaScriptBridge.HTMLElement.updateText(
         id,
-        title.characters,
+        title.charactersView,
         title.count
       )
     }

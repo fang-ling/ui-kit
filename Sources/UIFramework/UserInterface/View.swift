@@ -178,30 +178,30 @@ import FoundationFramework
          let value {
         UIJavaScriptBridge.HTMLElement.setStyleProperty(
           firstViewID,
-          property.characters,
+          property.charactersView,
           property.count,
-          value.characters,
+          value.charactersView,
           value.count
         )
 
-        if constraint.firstAttribute == .centerX,
-           let property = String("--translate-x"),
-           let value = String("-50%") {
+        if constraint.firstAttribute == .centerX {
+          let property = String("--translate-x")
+          let value = String("-50%")
           UIJavaScriptBridge.HTMLElement.setStyleProperty(
             firstViewID,
-            property.characters,
+            property.charactersView,
             property.count,
-            value.characters,
+            value.charactersView,
             value.count
           )
-        } else if constraint.firstAttribute == .centerY,
-                  let property = String("--translate-y"),
-                  let value = String("-50%") {
+        } else if constraint.firstAttribute == .centerY {
+          let property = String("--translate-y")
+          let value = String("-50%")
           UIJavaScriptBridge.HTMLElement.setStyleProperty(
             firstViewID,
-            property.characters,
+            property.charactersView,
             property.count,
-            value.characters,
+            value.charactersView,
             value.count
           )
         }
