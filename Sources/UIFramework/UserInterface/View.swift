@@ -195,22 +195,22 @@ import FoundationFramework
     JavaScriptBridge.setElementStyleProperty(
       id: self.layer.id,
       property: String("left"),
-      value: String("\(layer.frame.origin.x)px")
+      value: String("\(frame.origin.x)px")
     )
     JavaScriptBridge.setElementStyleProperty(
       id: self.layer.id,
       property: String("top"),
-      value: String("\(layer.frame.origin.y)px")
+      value: String("\(frame.origin.y)px")
     )
     JavaScriptBridge.setElementStyleProperty(
       id: self.layer.id,
       property: String("width"),
-      value: String("\(layer.frame.size.width)px")
+      value: String("\(frame.size.width)px")
     )
     JavaScriptBridge.setElementStyleProperty(
       id: self.layer.id,
       property: String("height"),
-      value: String("\(layer.frame.size.height)px")
+      value: String("\(frame.size.height)px")
     )
   }
 
