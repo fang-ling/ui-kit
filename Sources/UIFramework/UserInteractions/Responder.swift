@@ -20,6 +20,4 @@
 @MainActor
 open class Responder {
   var next: Responder?
-
-  public init() { }
 }

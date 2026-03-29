@@ -25,16 +25,13 @@
 
   <style>
     .view {
-      position: fixed;
+      position: absolute;
       box-sizing: border-box;
-
-      /* Workaround to separate updating translate. */
-      translate: var(--translate-x, 0%) var(--translate-y, 0%);
     }
 
-    .view-root {
-      position: fixed;
-      inset: 0;
+    body {
+      background: black;
+      position: relative;
     }
   </style>
 </head>
@@ -47,7 +44,9 @@
       File,
       ConsoleStdout
     } from "/Resources/WASIShims.js"
-    import { UIJavaScriptBridge } from "/Resources/UIJavaScriptBridge.js"
+    import {
+      UIFramework_JavaScriptBridge
+    } from "/Resources/UIJavaScriptBridge.js"
 
     const wasi = new WASI(
       [],
@@ -70,43 +69,81 @@
         wasi_snapshot_preview1: wasi.wasiImport,
         env: {
           memory,
-          UIJavaScriptBridge_HTMLElement_UpdateText: (id, text, textCount) => {
+          /*UIJavaScriptBridge_HTMLElement_UpdateText: (id, text, textCount) => {
             UIJavaScriptBridge.updateElementText(id, text, textCount)
-          },
-          UIJavaScriptBridge_HTMLElement_Initialize: (
-            htmlElementType,
+          },*/
+          UIFramework_JavaScriptBridge_InitializeElement: (
+            elementType,
             id,
-            parentID
+            idCount
           ) => {
-            UIJavaScriptBridge.initializeElement(htmlElementType, id, parentID)
+            UIFramework_JavaScriptBridge.initializeElement(
+              elementType,
+              id,
+              idCount
+            )
           },
-          UIJavaScriptBridge_HTMLElement_SetStyleProperty: (
+          UIFramework_JavaScriptBridge_LinkElements: (
             id,
+            idCount,
+            parentID,
+            parentIDCount
+          ) => {
+            UIFramework_JavaScriptBridge.linkElements(
+              id,
+              idCount,
+              parentID,
+              parentIDCount
+            )
+          },
+          UIFramework_JavaScriptBridge_GetWindowWidth: () => {
+            return UIFramework_JavaScriptBridge.getWindowWidth()
+          },
+          UIFramework_JavaScriptBridge_GetWindowHeight: () => {
+            return UIFramework_JavaScriptBridge.getWindowHeight()
+          },
+          UIFramework_JavaScriptBridge_SetElementStyleProperty: (
+            id,
+            idCount,
             property,
             propertyCount,
             value,
             valueCount
           ) => {
-            UIJavaScriptBridge.setStyleProperty(
+            UIFramework_JavaScriptBridge.setElementStyleProperty(
               id,
+              idCount,
               property,
               propertyCount,
               value,
               valueCount
             )
           },
-          UIJavaScriptBridge_HTMLElement_AddEventListener: (
+          UIFramework_JavaScriptBridge_RemoveElementStyleProperty: (
+            id,
+            idCount,
+            property,
+            propertyCount
+          ) => {
+            UIFramework_JavaScriptBridge.removeElementStyleProperty(
+              id,
+              idCount,
+              property,
+              propertyCount
+            )
+          }
+          /*UIJavaScriptBridge_HTMLElement_AddEventListener: (
             htmlEventType,
             id
           ) => {
             UIJavaScriptBridge.addEventListener(htmlEventType, id)
-          }
+          }*/
         }
       }
     )
     wasi.initialize(instance)
 
-    UIJavaScriptBridge.initialize(instance, memory)
+    UIFramework_JavaScriptBridge.initialize(instance, memory)
 
     instance.exports.__main_argc_argv()
   </script>

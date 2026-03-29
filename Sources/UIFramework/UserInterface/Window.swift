@@ -17,27 +17,35 @@
 //  limitations under the License.
 //
 
+import FoundationFramework
+
 @available(macOS 13.3.0, *)
 @MainActor public class Window: View {
-  public var rootViewController: ViewController? {
-    didSet {
-      if oldValue === rootViewController {
-        return
-      }
+  public override init(frame: Rectangle) {
+    super.init(frame: frame)
 
-      oldValue?.view?.removeFromSuperview()
-
-      guard let viewController = rootViewController else {
-        return
-      }
-
-      addSubview(viewController.view)
-    }
+    isHidden = true
   }
+
+//  public var rootViewController: ViewController? {
+//    didSet {
+//      if oldValue === rootViewController {
+//        return
+//      }
+//
+//      oldValue?.view?.removeFromSuperview()
+//
+//      guard let viewController = rootViewController else {
+//        return
+//      }
+//
+//      addSubview(viewController.view)
+//    }
+//  }
 
   public func makeKeyAndVisible() {
     Application.shared.windows.append(self)
-    displayIfNeeded()
-    updateConstraintsIfNeeded()
+    isHidden = false
+    JavaScriptBridge.linkElements(id: self.layer.id, parentID: nil)
   }
 }

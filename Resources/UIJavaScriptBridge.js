@@ -17,17 +17,17 @@
 //  limitations under the License.
 //
 
-export class UIJavaScriptBridge {
+export class UIFramework_JavaScriptBridge {
   static instance
   static memory
   static elements
-  static eventListeners
+//  static eventListeners
 
   static initialize(instance, memory) {
     this.instance = instance
     this.memory = memory
     this.elements = new Map()
-    this.eventListeners = new Map()
+//    this.eventListeners = new Map()
   }
 
   static readString(pointer, length) {
@@ -40,65 +40,93 @@ export class UIJavaScriptBridge {
   }
 
   static getElement(id) {
-    if (id === 0) {
+    if (id === "") {
       return document.body
     }
 
     return this.elements.get(id)
   }
 
-  static updateElementText(id, text, textCount) {
-    this.getElement(id).textContent = this.readString(text, textCount)
-  }
+//  static updateElementText(id, text, textCount) {
+//    this.getElement(id).textContent = this.readString(text, textCount)
+//  }
 
-  static initializeElement(htmlElementType, id, parentID) {
-    const elementType = (() => {
-      switch (htmlElementType) {
+  static initializeElement(elementType, id, idCount) {
+    const elementTypeString = (() => {
+      switch (elementType) {
         case 1: return "div"
         case 2: return "span"
         case 3: return "button"
       }
     })()
 
-    const element = document.createElement(elementType)
-    if (id === 1 || id === 2) { // window or rootViewController
-      element.className = "view-root"
-    } else {
-      element.className = "view"
-    }
-    element.style.setProperty("anchor-name", `--view-${id}`)
-    element.dataset.viewIdentifier = id.toString()
-    this.elements.set(id, element)
-
-    document.body.appendChild(element)
+    const idString = this.readString(id, idCount)
+    const element = document.createElement(elementTypeString)
+    element.className = "view"
+    this.elements.set(idString, element)
   }
 
-  static setStyleProperty(id, property, propertyCount, value, valueCount) {
-    this.getElement(id)?.style.setProperty(
+  static linkElements(id, idCount, parentID, parentIDCount) {
+    const idString = this.readString(id, idCount)
+    const parentIDString = this.readString(parentID, parentIDCount)
+
+    const element = this.getElement(idString)
+    const parentElement = this.getElement(parentIDString)
+    parentElement.appendChild(element)
+  }
+
+  static getWindowWidth() {
+    return window.innerWidth
+  }
+
+  static getWindowHeight() {
+    return window.innerHeight
+  }
+
+  static setElementStyleProperty(
+    id,
+    idCount,
+    property,
+    propertyCount,
+    value,
+    valueCount
+  ) {
+    this.getElement(this.readString(id, idCount))?.style.setProperty(
       this.readString(property, propertyCount),
       this.readString(value, valueCount)
     )
   }
 
-  static addEventListener(htmlEventType, id) {
-    const eventType = (() => {
-      switch (htmlEventType) {
-        case 1: return "click" // touchUpInside
-      }
-    })()
-
-    const eventHandler = () => {
-      this.instance.exports.UIJavaScriptBridge_HTMLElement_DispatchEvent(
-        id,
-        htmlEventType
-      )
-    }
-
-    if (!this.eventListeners.has(id)) {
-      this.eventListeners.set(id, new Map())
-    }
-    this.eventListeners.get(id).set(htmlEventType, eventHandler)
-
-    this.elements.get(id)?.addEventListener(eventType, eventHandler)
+  static removeElementStyleProperty(
+    id,
+    idCount,
+    property,
+    propertyCount
+  ) {
+    this.getElement(this.readString(id, idCount))?.style.removeProperty(
+      this.readString(property, propertyCount)
+    )
   }
+
+//  static addEventListener(htmlEventType, id) {
+//    const eventType = (() => {
+//      switch (htmlEventType) {
+//        case 1: return "click" // touchUpInside
+//      }
+//    })()
+//
+//    const eventHandler = () => {
+//      this.instance.exports.UIJavaScriptBridge_HTMLElement_DispatchEvent(
+//        id,
+//        htmlEventType
+//      )
+//    }
+//
+//    if (!this.eventListeners.has(id)) {
+//      this.eventListeners.set(id, new Map())
+//    }
+//    this.eventListeners.get(id).set(htmlEventType, eventHandler)
+//
+//    this.elements.get(id)?.addEventListener(eventType, eventHandler)
+//  }
 }

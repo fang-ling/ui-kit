@@ -22,7 +22,8 @@
 import PackageDescription
 
 let dependencies = [
-  ("https://github.com/fang-ling/foundation-framework", "main")
+  ("https://github.com/fang-ling/animation-framework", "snapshot"),
+  ("https://github.com/fang-ling/foundation-framework", "snapshot")
 ]
 
 let package = Package(
@@ -35,6 +36,7 @@ let package = Package(
     .target(
       name: "UIFramework",
       dependencies: [
+        .product(name: "AnimationFramework", package: "animation-framework"),
         .product(name: "FoundationFramework", package: "foundation-framework")
       ],
       swiftSettings: [

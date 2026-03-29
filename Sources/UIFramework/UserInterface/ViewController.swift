@@ -17,36 +17,36 @@
 //  limitations under the License.
 //
 
-@available(macOS 13.3.0, *)
-@MainActor open class ViewController: Responder {
-  var _view: View?
-
-  public var view: View! {
-    get {
-      loadViewIfNeeded()
-      return _view
-    }
-    set {
-      _view?.next = nil
-      _view = newValue
-      newValue.next = self
-    }
-  }
-
-  var isViewLoaded: Bool {
-    return _view != nil
-  }
-
-  func loadView() {
-    view = View()
-  }
-
-  func loadViewIfNeeded() {
-    if !isViewLoaded {
-      loadView()
-      viewDidLoad()
-    }
-  }
-
-  open func viewDidLoad() { }
-}
+//@available(macOS 13.3.0, *)
+//@MainActor open class ViewController: Responder {
+//  var _view: View?
+//
+//  public var view: View! {
+//    get {
+//      loadViewIfNeeded()
+//      return _view
+//    }
+//    set {
+//      _view?.next = nil
+//      _view = newValue
+//      newValue.next = self
+//    }
+//  }
+//
+//  var isViewLoaded: Bool {
+//    return _view != nil
+//  }
+//
+//  func loadView() {
+//    view = View()
+//  }
+//
+//  func loadViewIfNeeded() {
+//    if !isViewLoaded {
+//      loadView()
+//      viewDidLoad()
+//    }
+//  }
+//
+//  open func viewDidLoad() { }
+//}

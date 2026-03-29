@@ -20,66 +20,63 @@
 import FoundationFramework
 import UIFramework
 
-@available(macOS 13.3.0, *)
-class MainViewController: ViewController {
-  lazy var label = Label()
-  lazy var button = Button()
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    setupLabel()
-    setupButton()
-  }
-
-  func setupLabel() {
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.text = String("Hello, 🌍!")
-
-    view.addSubview(label)
-
-    LayoutConstraint.activate([
-      label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      label.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50)
-    ])
-  }
-
-  func setupButton() {
-    button.translatesAutoresizingMaskIntoConstraints = false
-    button.title = String("Click me!")
-    button.addAction(
-      Action(handler: { [weak self] _ in
-        self?.label.text = String("You clicked me!")
-      }),
-      for: .touchUpInside
-    )
-
-    view.addSubview(button)
-
-    LayoutConstraint.activate([
-      button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50)
-    ])
-  }
-}
+//@available(macOS 13.3.0, *)
+//class MainViewController: ViewController {
+//  lazy var label = Label()
+//  lazy var button = Button()
+//
+//  override func viewDidLoad() {
+//    super.viewDidLoad()
+//
+//    setupLabel()
+//    setupButton()
+//  }
+//
+//  func setupLabel() {
+//    label.translatesAutoresizingMaskIntoConstraints = false
+//    label.text = String("Hello, 🌍!")
+//
+//    view.addSubview(label)
+//
+//    LayoutConstraint.activate([
+//      label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//      label.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50)
+//    ])
+//  }
+//
+//  func setupButton() {
+//    button.translatesAutoresizingMaskIntoConstraints = false
+//    button.title = String("Click me!")
+//    button.addAction(
+//      Action(handler: { [weak self] _ in
+//        self?.label.text = String("You clicked me!")
+//      }),
+//      for: .touchUpInside
+//    )
+//
+//    view.addSubview(button)
+//
+//    LayoutConstraint.activate([
+//      button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//      button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50)
+//    ])
+//  }
+//}
 
 @available(macOS 13.3.0, *)
 @main @MainActor final class AppDelegate: ApplicationDelegate {
   var window: Window?
 
   func applicationDidFinishLaunching() {
-    let viewController = MainViewController()
-    viewController.view.translatesAutoresizingMaskIntoConstraints = false
+//    let viewController = MainViewController()
+//    viewController.view.translatesAutoresizingMaskIntoConstraints = false
 
-    window = Window()
-    window?.rootViewController = viewController
+    window = Window(frame: Screen.main.bounds)
+//    window?.rootViewController = viewController
     window?.makeKeyAndVisible()
   }
 
   static func main() {
-    let delegate = AppDelegate()
-    Application.shared.delegate = delegate
-
-    delegate.applicationDidFinishLaunching()
+    ApplicationMain(delegate: AppDelegate())
   }
 }

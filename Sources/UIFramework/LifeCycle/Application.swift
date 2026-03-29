@@ -17,6 +17,8 @@
 //  limitations under the License.
 //
 
+import AnimationFramework
+
 @available(macOS 13.3.0, *)
 @MainActor public class Application {
   private init() { }
@@ -28,4 +30,14 @@
   var keyWindow: Window? { windows.last }
 
   var windows: [Window] = []
+}
+
+@available(macOS 13.3.0, *)
+@MainActor public func ApplicationMain(delegate: some ApplicationDelegate) {
+  Application.shared.delegate = delegate
+
+  delegate.applicationDidFinishLaunching()
+
+  // Initial render
+  flush(Application.shared.keyWindow?.layer)
 }
