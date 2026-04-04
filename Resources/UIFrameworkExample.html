@@ -32,6 +32,7 @@
     body {
       background: black;
       position: relative;
+      margin: 0px;
     }
   </style>
 </head>
@@ -45,8 +46,14 @@
       ConsoleStdout
     } from "/Resources/WASIShims.js"
     import {
-      UIFramework_JavaScriptBridge
-    } from "/Resources/UIJavaScriptBridge.js"
+      JavaScriptBridge_Initialize,
+      JavaScriptBridge_InitializeElement,
+      JavaScriptBridge_GetWindowWidth,
+      JavaScriptBridge_GetWindowHeight,
+      JavaScriptBridge_SetElementStyleProperty,
+      JavaScriptBridge_RemoveElementStyleProperty,
+      JavaScriptBridge_LinkElements
+    } from "/Resources/JavaScriptBridge.js"
 
     const wasi = new WASI(
       [],
@@ -72,66 +79,12 @@
           /*UIJavaScriptBridge_HTMLElement_UpdateText: (id, text, textCount) => {
             UIJavaScriptBridge.updateElementText(id, text, textCount)
           },*/
-          UIFramework_JavaScriptBridge_InitializeElement: (
-            elementType,
-            id,
-            idCount
-          ) => {
-            UIFramework_JavaScriptBridge.initializeElement(
-              elementType,
-              id,
-              idCount
-            )
-          },
-          UIFramework_JavaScriptBridge_LinkElements: (
-            id,
-            idCount,
-            parentID,
-            parentIDCount
-          ) => {
-            UIFramework_JavaScriptBridge.linkElements(
-              id,
-              idCount,
-              parentID,
-              parentIDCount
-            )
-          },
-          UIFramework_JavaScriptBridge_GetWindowWidth: () => {
-            return UIFramework_JavaScriptBridge.getWindowWidth()
-          },
-          UIFramework_JavaScriptBridge_GetWindowHeight: () => {
-            return UIFramework_JavaScriptBridge.getWindowHeight()
-          },
-          UIFramework_JavaScriptBridge_SetElementStyleProperty: (
-            id,
-            idCount,
-            property,
-            propertyCount,
-            value,
-            valueCount
-          ) => {
-            UIFramework_JavaScriptBridge.setElementStyleProperty(
-              id,
-              idCount,
-              property,
-              propertyCount,
-              value,
-              valueCount
-            )
-          },
-          UIFramework_JavaScriptBridge_RemoveElementStyleProperty: (
-            id,
-            idCount,
-            property,
-            propertyCount
-          ) => {
-            UIFramework_JavaScriptBridge.removeElementStyleProperty(
-              id,
-              idCount,
-              property,
-              propertyCount
-            )
-          }
+          JavaScriptBridge_InitializeElement,
+          JavaScriptBridge_GetWindowWidth,
+          JavaScriptBridge_GetWindowHeight,
+          JavaScriptBridge_SetElementStyleProperty,
+          JavaScriptBridge_RemoveElementStyleProperty,
+          JavaScriptBridge_LinkElements
           /*UIJavaScriptBridge_HTMLElement_AddEventListener: (
             htmlEventType,
             id
@@ -143,7 +96,7 @@
     )
     wasi.initialize(instance)
 
-    UIFramework_JavaScriptBridge.initialize(instance, memory)
+    JavaScriptBridge_Initialize(instance, memory)
 
     instance.exports.__main_argc_argv()
   </script>

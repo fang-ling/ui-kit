@@ -20,18 +20,18 @@
 import FoundationFramework
 import UIFramework
 
-//@available(macOS 13.3.0, *)
-//class MainViewController: ViewController {
+@available(macOS 13.3.0, *)
+class MainViewController: ViewController {
 //  lazy var label = Label()
 //  lazy var button = Button()
-//
-//  override func viewDidLoad() {
-//    super.viewDidLoad()
-//
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
 //    setupLabel()
 //    setupButton()
-//  }
-//
+  }
+
 //  func setupLabel() {
 //    label.translatesAutoresizingMaskIntoConstraints = false
 //    label.text = String("Hello, 🌍!")
@@ -61,18 +61,18 @@ import UIFramework
 //      button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50)
 //    ])
 //  }
-//}
+}
 
 @available(macOS 13.3.0, *)
 @main @MainActor final class AppDelegate: ApplicationDelegate {
   var window: Window?
 
   func applicationDidFinishLaunching() {
-//    let viewController = MainViewController()
+    let viewController = MainViewController()
 //    viewController.view.translatesAutoresizingMaskIntoConstraints = false
 
     window = Window(frame: Screen.main.bounds)
-//    window?.rootViewController = viewController
+    window?.rootViewController = viewController
     window?.makeKeyAndVisible()
   }
 

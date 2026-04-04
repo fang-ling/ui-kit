@@ -18,10 +18,11 @@
 //
 
 import AnimationFramework
+import JavaScriptBridgeFramework
 
 @available(macOS 13.3.0, *)
-@MainActor public class Application {
-  private init() { }
+@MainActor public class Application: Responder {
+  private override init() { }
 
   public static let shared = Application()
 
@@ -38,6 +39,9 @@ import AnimationFramework
 
   delegate.applicationDidFinishLaunching()
 
-  // Initial render
-  flush(Application.shared.keyWindow?.layer)
+  // Initial rendering
+  Transaction.flush(Application.shared.keyWindow?.layer)
+  if let contents = Application.shared.keyWindow?.layer.contents {
+    JavaScriptBridge.linkElements(elementID: contents, parentID: nil)
+  }
 }

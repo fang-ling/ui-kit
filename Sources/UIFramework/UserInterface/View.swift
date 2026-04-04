@@ -19,14 +19,41 @@
 
 import AnimationFramework
 import FoundationFramework
+import JavaScriptBridgeFramework
 
 @available(macOS 13.3.0, *)
-@MainActor public class View: Responder, @MainActor LayerDelegate {
-  /// A Boolean value indicating whether the HTML document element has been
-  /// marked as needing an update.
-  var needsDisplay: Bool {
+@MainActor public class View: Responder {
+  /// A Boolean value indicating whether the receiver's entire bounds rectangle
+  /// as needing to be redrawn.
+  ///
+  /// You can use set this value to `true` to notify the system that your view's
+  /// contents need to be redrawn. The view is not actually redrawn until the
+  /// next drawing cycle, at which point all invalidated views are updated.
+  ///
+  /// You should update this value to request that a view be redrawn only when
+  /// the content or appearance of the view change. If you simply change the
+  /// geometry of the view, the view is typically not redrawn. Instead, its
+  /// existing content is adjusted based on the value in the view's
+  /// ``contentMode`` property. Redisplaying the existing content improves
+  /// performance by avoiding the need to redraw content that has not changed.
+  var needsDisplay: BinaryLogic {
     get { layer.needsDisplay }
     set { layer.needsDisplay = newValue }
+  }
+
+  /// A Boolean value indicating whether the current layout of the receiver as
+  /// needing a layout update during the next update cycle.
+  ///
+  /// Update this value to `true` on your application's main thread when you
+  /// want to adjust the layout of a view's subviews. Because updating this
+  /// value does not force an immediate update, but instead waits for the next
+  /// update cycle, you can use it to invalidate the layout of multiple views
+  /// before any of those views are updated. This behavior allows you to
+  /// consolidate all of your layout updates to one update cycle, which is
+  /// usually better for performance.
+  var needsLayout: BinaryLogic {
+    get { layer.needsLayout }
+    set { layer.needsLayout = newValue }
   }
 
   //  /// A Boolean value that determines whether the view's constraints need
@@ -46,7 +73,7 @@ import FoundationFramework
   /// > Warning: Because the view is the layer's delegate, never make the view
   ///   the delegate of another ``Layer`` object. Additionally, never change the
   ///   delegate of this layer object.
-  open var layer = Layer()
+  public var layer = Layer()
 
   /// The frame rectangle, which describes the view's location and size in its
   /// superview's coordinate system.
@@ -136,38 +163,75 @@ import FoundationFramework
   public init(frame: Rectangle) {
     super.init()
 
+    self.frame = frame
     self.layer.delegate = self
 
     JavaScriptBridge.initializeElement(
-      elementType: .division,
-      id: self.layer.id
+      elementID: self.layer.contents,
+      elementType: .division
     )
   }
 
-  public func draw(_ layer: Layer) {
-    draw()
+  /// Lays out subviews.
+  ///
+  /// The default implementation uses any constraints you set to determine the
+  /// size and position of any subviews.
+  ///
+  /// Subclasses can override this method as needed to perform more precise
+  /// layout of their subviews. You should override this method only if the
+  /// autoresizing and constraint-based behaviors of the subviews don't offer
+  /// the behavior you want. You can use your implementation to set the frame
+  /// rectangles of your subviews directly.
+  ///
+  /// Don't call this method directly. If you want to force a layout update, set
+  /// the ``needsLayout`` to `true` instead to do so prior to the next drawing
+  /// update. If you want to update the layout of your views immediately, call
+  /// the ``layoutIfNeeded()`` method.
+  func layoutSubviews() {
+    // TODO: Start the constraint pass here
   }
 
-  /// Draws the view.
-  ///
-  /// This method is called when a view is first displayed or when an event
-  /// occurs that invalidates a visible part of the view. You should never call
-  /// this method directly yourself. To invalidate part of your view, and thus
-  /// cause that portion to be redrawn, set ``needsDisplay`` to `true` instead.
-  func draw() {
-    if isHidden {
-      JavaScriptBridge.setElementStyleProperty(
-        id: self.layer.id,
-        property: String("display"),
-        value: String("none")
-      )
-    } else {
-      JavaScriptBridge.removeElementStyleProperty(
-        id: self.layer.id,
-        property: String("display")
-      )
+  func addSubview(_ view: View) {
+    if view.superview !== self {
+      view.removeFromSuperview()
     }
-    // TODO: Frame
+
+    subviews.append(view)
+
+    layer.addSublayer(view.layer)
+
+    view.superview = self
+
+    // TODO: Auto Layout
+//    view.needsUpdateConstraints = true
+//    needsUpdateConstraints = true
+  }
+
+  /// Unlinks the view from its superview and its window, and removes it from
+  /// the responder chain.
+  ///
+  /// If the view's superview is not `nil`, the superview releases the view.
+  ///
+  /// Calling this method removes any constraints that refer to the view you are
+  /// removing, or that refer to any view in the subtree of the view you are
+  /// removing.
+  ///
+  /// > Important: Never call this method from inside your view's ``draw()``
+  ///   method.
+  func removeFromSuperview() {
+    guard
+      let index = superview?.subviews.firstIndex(where: { $0 === self })
+    else {
+      return
+    }
+
+    superview?.subviews.remove(at: index)
+
+    superview = nil
+
+    layer.removeFromSuperlayer()
+
+    // TODO: Auto Layout
   }
 
 //  // TODO: Use FoundationFramework's Array
@@ -213,28 +277,6 @@ import FoundationFramework
 //    attribute: .height
 //  )
 
-//  public func addSubview(_ view: View) {
-//    if view.superview !== self {
-//      view.removeFromSuperview()
-//    }
-//
-//    subviews.append(view)
-//
-//    view.superview = self
-//
-//    needsDisplay = true
-//  }
-//
-//  func removeFromSuperview() {
-//    guard
-//      let index = superview?.subviews.firstIndex(where: { $0 === self })
-//    else {
-//      return
-//    }
-//
-//    superview?.subviews.remove(at: index)
-//  }
-
 //  func addConstraint(_ constraint: LayoutConstraint) {
 //    constraints.append(constraint)
 //    needsUpdateConstraints = true
@@ -245,51 +287,6 @@ import FoundationFramework
 //    constraints.removeAll(where: { $0 === constraint })
 //    needsUpdateConstraints = true
 //    superview?.needsUpdateConstraints = true
-//  }
-
-  /// Initiates the update process for a view if it is currently marked as
-  /// needing an update.
-  ///
-  /// You can call this method as needed to force an update to your view's
-  /// contents outside of the normal update cycle. Doing so is generally not
-  /// needed, though. The preferred way to update a view is to set
-  /// ``needsDisplay`` to `true` and let the system update the view during the
-  /// next cycle.
-//  func displayIfNeeded() {
-//    if needsDisplay {
-//      //    if id == nil {
-//      //      let id = UIFramework_GetNextViewID()
-//      //      self.id = id
-//      //
-//      //      let type: UIJavaScriptBridge.HTMLElement.`Type` = .division
-//      //      UIJavaScriptBridge.HTMLElement.initialize(
-//      //        type.rawValue,
-//      //        id,
-//      //        superview?.id ?? 0
-//      //      )
-//      //    }
-//      display()
-//      needsDisplay = false
-//    }
-//
-//    for child in subviews {
-//      child.displayIfNeeded()
-//    }
-//  }
-
-  /// Reloads the content of this view.
-  ///
-  /// Do not call this method directly. The view calls this method at
-  /// appropriate times to update the view's content. If the subclass does not
-  /// implement the ``display()`` method, this method creates a backing store
-  /// and calls the view's ``draw()`` method to fill that backing store with
-  /// content. The new backing store replaces the previous contents of the view.
-  ///
-  /// Subclasses can override this method and use it to set the view's contents
-  /// property directly. You might do this if your custom view subclass handles
-  /// view updates differently.
-//  func display() {
-//
 //  }
 
 //  /// Updates the constraints for the receiving view and its subviews.
@@ -316,7 +313,7 @@ import FoundationFramework
   ///
   /// Override this method to optimize changes to your constraints.
   ///
-  /// > Note: It’s almost always cleaner and easier to update a constraint
+  /// > Note: It's almost always cleaner and easier to update a constraint
   ///   immediately after the affecting change has occurred. For example, if you
   ///   want to change a constraint in response to a button tap, make that
   ///   change directly in the button's action method.
@@ -451,4 +448,48 @@ import FoundationFramework
 //      return String("calc(anchor(\(anchorName) \(side)) + \(constant)px)")
 //    }
 //  }
+}
+
+@available(macOS 13.3.0, *)
+extension View: @MainActor LayerDelegate {
+  public func display(_ layer: Layer) {
+    if isHidden {
+      JavaScriptBridge.setElementStyleProperty(
+        elementID: layer.contents,
+        property: String("visibility"),
+        value: String("hidden")
+      )
+    } else {
+      JavaScriptBridge.removeElementStyleProperty(
+        elementID: layer.contents,
+        property: String("visibility")
+      )
+    }
+
+    // Apply the frame
+    JavaScriptBridge.setElementStyleProperty(
+      elementID: layer.contents,
+      property: String("left"),
+      value: String("\(frame.origin.x)px")
+    )
+    JavaScriptBridge.setElementStyleProperty(
+      elementID: layer.contents,
+      property: String("top"),
+      value: String("\(frame.origin.y)px")
+    )
+    JavaScriptBridge.setElementStyleProperty(
+      elementID: layer.contents,
+      property: String("width"),
+      value: String("\(frame.size.width)px")
+    )
+    JavaScriptBridge.setElementStyleProperty(
+      elementID: layer.contents,
+      property: String("height"),
+      value: String("\(frame.size.height)px")
+    )
+  }
+
+  public func layoutSublayers(of layer: Layer) {
+    layoutSubviews()
+  }
 }

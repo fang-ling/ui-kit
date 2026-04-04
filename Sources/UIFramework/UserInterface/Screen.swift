@@ -18,6 +18,7 @@
 //
 
 import FoundationFramework
+import JavaScriptBridgeFramework
 
 /// An object that defines the properties associated with a hardware-based
 /// display.

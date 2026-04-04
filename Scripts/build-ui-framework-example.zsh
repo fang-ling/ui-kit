@@ -34,6 +34,8 @@ $SWIFT build \
   -Xlinker --export-if-defined=__main_argc_argv \
   -Xcc -I$SWIFT_BRIDGING_HEADER
 
+cp ../javascript-bridge-framework/Resources/JavaScriptBridge.js Resources
+
 echo "  - Local: http://localhost:3000/Resources/UIFrameworkExample.html"
 
 python3 -m http.server 3000
