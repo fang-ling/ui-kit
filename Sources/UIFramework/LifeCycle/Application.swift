@@ -41,7 +41,4 @@ import JavaScriptBridgeFramework
 
   // Initial rendering
   Transaction.flush(Application.shared.keyWindow?.layer)
-  if let contents = Application.shared.keyWindow?.layer.contents {
-    JavaScriptBridge.linkElements(elementID: contents, parentID: nil)
-  }
 }

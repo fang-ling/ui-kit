@@ -18,19 +18,6 @@
 //
 
 //extension UIJavaScriptBridge.HTMLElement {
-//
-//
-//  @_extern(
-//    wasm,
-//    module: "env",
-//    name: "UIJavaScriptBridge_HTMLElement_UpdateText"
-//  )
-//  static func updateText(
-//    _ id: UnsignedInteger32,
-//    _ text: UnsafePointer<Integer32>,
-//    _ textCount: UnsignedInteger64
-//  )
-//
 //  @_extern(
 //    wasm,
 //    module: "env",

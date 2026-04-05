@@ -34,6 +34,10 @@
       position: relative;
       margin: 0px;
     }
+
+    p {
+      margin: 0px;
+    }
   </style>
 </head>
 
@@ -52,7 +56,8 @@
       JavaScriptBridge_GetWindowHeight,
       JavaScriptBridge_SetElementStyleProperty,
       JavaScriptBridge_RemoveElementStyleProperty,
-      JavaScriptBridge_LinkElements
+      JavaScriptBridge_LinkElements,
+      JavaScriptBridge_UpdateElementTextContent
     } from "/Resources/JavaScriptBridge.js"
 
     const wasi = new WASI(
@@ -76,15 +81,13 @@
         wasi_snapshot_preview1: wasi.wasiImport,
         env: {
           memory,
-          /*UIJavaScriptBridge_HTMLElement_UpdateText: (id, text, textCount) => {
-            UIJavaScriptBridge.updateElementText(id, text, textCount)
-          },*/
           JavaScriptBridge_InitializeElement,
           JavaScriptBridge_GetWindowWidth,
           JavaScriptBridge_GetWindowHeight,
           JavaScriptBridge_SetElementStyleProperty,
           JavaScriptBridge_RemoveElementStyleProperty,
-          JavaScriptBridge_LinkElements
+          JavaScriptBridge_LinkElements,
+          JavaScriptBridge_UpdateElementTextContent
           /*UIJavaScriptBridge_HTMLElement_AddEventListener: (
             htmlEventType,
             id

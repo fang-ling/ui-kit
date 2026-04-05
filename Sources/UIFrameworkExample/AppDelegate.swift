@@ -22,28 +22,28 @@ import UIFramework
 
 @available(macOS 13.3.0, *)
 class MainViewController: ViewController {
-//  lazy var label = Label()
+  lazy var label = Label(frame: .init(x: 36, y: 48, width: 360, height: 480))
 //  lazy var button = Button()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-//    setupLabel()
+    setupLabel()
 //    setupButton()
   }
 
-//  func setupLabel() {
+  func setupLabel() {
 //    label.translatesAutoresizingMaskIntoConstraints = false
-//    label.text = String("Hello, 🌍!")
-//
-//    view.addSubview(label)
-//
+    label.text = String("Hello, 🌍!")
+
+    view.addSubview(label)
+
 //    LayoutConstraint.activate([
 //      label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 //      label.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50)
 //    ])
-//  }
-//
+  }
+
 //  func setupButton() {
 //    button.translatesAutoresizingMaskIntoConstraints = false
 //    button.title = String("Click me!")

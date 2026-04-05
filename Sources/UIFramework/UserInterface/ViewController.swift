@@ -188,7 +188,7 @@ import FoundationFramework
   /// automatically, you can use ``isViewLoaded`` to determine if the view is
   /// currently in memory. Unlike this property, ``isViewLoaded`` doesn't force
   /// the loading of the view if it's not currently in memory.
-  var view: View! {
+  public var view: View! {
     get {
       if _view == nil {
         loadView()
