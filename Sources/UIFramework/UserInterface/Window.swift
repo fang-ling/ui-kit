@@ -97,5 +97,7 @@ import JavaScriptBridgeFramework
   public func makeKeyAndVisible() {
     Application.shared.windows.append(self)
     isHidden = false
+
+    JavaScriptBridge.linkElements(elementID: layer.contents, parentID: nil)
   }
 }

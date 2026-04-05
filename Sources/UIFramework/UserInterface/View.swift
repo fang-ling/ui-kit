@@ -22,7 +22,7 @@ import FoundationFramework
 import JavaScriptBridgeFramework
 
 @available(macOS 13.3.0, *)
-@MainActor public class View: Responder {
+@MainActor public class View: Responder, @MainActor LayerDelegate {
   /// A Boolean value indicating whether the receiver's entire bounds rectangle
   /// as needing to be redrawn.
   ///
@@ -160,7 +160,7 @@ import JavaScriptBridgeFramework
   ///   The origin of the frame is relative to the superview in which you plan
   ///   to add it. This method uses the frame rectangle to set the ``center``
   ///   and ``bounds`` properties accordingly.
-  public init(frame: Rectangle) {
+  public init(frame: Rectangle = .zero) {
     super.init()
 
     self.frame = frame
@@ -191,7 +191,7 @@ import JavaScriptBridgeFramework
     // TODO: Start the constraint pass here
   }
 
-  func addSubview(_ view: View) {
+  public func addSubview(_ view: View) {
     if view.superview !== self {
       view.removeFromSuperview()
     }
@@ -448,10 +448,7 @@ import JavaScriptBridgeFramework
 //      return String("calc(anchor(\(anchorName) \(side)) + \(constant)px)")
 //    }
 //  }
-}
 
-@available(macOS 13.3.0, *)
-extension View: @MainActor LayerDelegate {
   public func display(_ layer: Layer) {
     if isHidden {
       JavaScriptBridge.setElementStyleProperty(
