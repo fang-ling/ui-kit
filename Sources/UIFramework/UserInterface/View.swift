@@ -98,7 +98,7 @@ import JavaScriptBridgeFramework
   /// property is undefined and should not be modified. In that case, reposition
   /// the view using the ``center`` property and adjust the size using the
   /// ``bounds`` property instead.
-  var frame: Rectangle {
+  public var frame: Rectangle {
     get { layer.frame }
     set { layer.frame = newValue }
   }

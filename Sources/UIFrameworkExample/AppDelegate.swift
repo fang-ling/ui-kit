@@ -23,13 +23,13 @@ import UIFramework
 @available(macOS 13.3.0, *)
 class MainViewController: ViewController {
   lazy var label = Label(frame: .init(x: 36, y: 48, width: 360, height: 480))
-//  lazy var button = Button()
+  lazy var button = Button(type: .system)
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     setupLabel()
-//    setupButton()
+    setupButton()
   }
 
   func setupLabel() {
@@ -44,23 +44,24 @@ class MainViewController: ViewController {
 //    ])
   }
 
-//  func setupButton() {
+  func setupButton() {
 //    button.translatesAutoresizingMaskIntoConstraints = false
-//    button.title = String("Click me!")
-//    button.addAction(
-//      Action(handler: { [weak self] _ in
-//        self?.label.text = String("You clicked me!")
-//      }),
-//      for: .touchUpInside
-//    )
-//
-//    view.addSubview(button)
-//
+    button.frame = .init(x: 36, y: 58, width: 360, height: 580)
+    button.setTitle(String("Click me!"), for: .normal)
+    button.addAction(
+      Action(handler: { [weak self] _ in
+        self?.label.text = String("You clicked me!")
+      }),
+      for: .touchUpInside
+    )
+
+    view.addSubview(button)
+
 //    LayoutConstraint.activate([
 //      button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 //      button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50)
 //    ])
-//  }
+  }
 }
 
 @available(macOS 13.3.0, *)
