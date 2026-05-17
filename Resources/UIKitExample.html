@@ -1,6 +1,6 @@
 <!--
 //
-//  UIFrameworkExample.html
+//  UIKitExample.html
 //  ui-framework
 //
 //  Created by Fang Ling on 2026/3/22.
@@ -56,17 +56,16 @@
       ConsoleStdout
     } from "/Resources/WASIShims.js"
     import {
-      JavaScriptBridge_Initialize,
-      JavaScriptBridge_InitializeElement,
-      JavaScriptBridge_GetWindowWidth,
-      JavaScriptBridge_GetWindowHeight,
-      JavaScriptBridge_MeasureTextSize,
-      JavaScriptBridge_SetElementStyleProperty,
-      JavaScriptBridge_RemoveElementStyleProperty,
-      JavaScriptBridge_LinkElements,
-      JavaScriptBridge_UpdateElementTextContent,
-      JavaScriptBridge_AddElementEventListener
-    } from "/Resources/JavaScriptBridge.js"
+      JavaScriptCoreInitialize,
+      JavaScriptCoreNodeInitializeDivisionNode,
+      JavaScriptCoreWindowGetWidth,
+      JavaScriptCoreWindowGetHeight,
+      //JavaScriptBridge_MeasureTextSize,
+      JavaScriptCoreNodeUpdateStyleProperty,
+      JavaScriptCoreNodeAddSubnode,
+      //JavaScriptBridge_UpdateElementTextContent,
+      //JavaScriptBridge_AddElementEventListener
+    } from "/Resources/JavaScriptCoreKit.js"
 
     const wasi = new WASI(
       [],
@@ -84,27 +83,27 @@
       shared: true
     })
     const { instance } = await WebAssembly.instantiateStreaming(
-      fetch("/.build/release/UIFrameworkExample.wasm"),
+      fetch("/.build/release/UIKitExample.wasm"),
       {
         wasi_snapshot_preview1: wasi.wasiImport,
         env: {
           memory,
-          JavaScriptBridge_InitializeElement,
-          JavaScriptBridge_GetWindowWidth,
-          JavaScriptBridge_GetWindowHeight,
-          JavaScriptBridge_MeasureTextSize,
-          JavaScriptBridge_SetElementStyleProperty,
-          JavaScriptBridge_RemoveElementStyleProperty,
-          JavaScriptBridge_LinkElements,
-          JavaScriptBridge_UpdateElementTextContent,
-          JavaScriptBridge_AddElementEventListener
+          swift_addNewDSOImage: () => {},
+          JavaScriptCoreNodeInitializeDivisionNode,
+          JavaScriptCoreWindowGetWidth,
+          JavaScriptCoreWindowGetHeight,
+          //JavaScriptBridge_MeasureTextSize,
+          JavaScriptCoreNodeUpdateStyleProperty,
+          JavaScriptCoreNodeAddSubnode,
+          //JavaScriptBridge_UpdateElementTextContent,
+          //JavaScriptBridge_AddElementEventListener
         }
       }
     )
     wasi.initialize(instance)
 
-    JavaScriptBridge_Initialize(instance, memory)
+    JavaScriptCoreInitialize(instance, memory)
 
-    instance.exports.__main_argc_argv()
+    instance.exports.main()
   </script>
 </body>

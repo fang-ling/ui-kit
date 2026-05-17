@@ -21,37 +21,56 @@
 
 import PackageDescription
 
+let isDevelopment = false
+
 let dependencies = [
-  ("https://github.com/fang-ling/animation-framework", "snapshot"),
-  ("https://github.com/fang-ling/foundation-framework", "snapshot"),
-  ("https://github.com/fang-ling/javascript-bridge-framework", "snapshot")
+  ("c-kit", "main"),
+  ("core-animation-kit", "main"),
+  ("core-foundation-kit", "main"),
+  ("foundation-kit", "main"),
+  ("javascript-core-kit", "main"),
+  ("objective-c-kit", "main")
 ]
 
 let package = Package(
-  name: "ui-framework",
+  name: "ui-kit",
   products: [
-    .library(name: "UIFramework", targets: ["UIFramework"])
+    .library(name: "UIKit", targets: ["UIKit"])
   ],
-  dependencies: dependencies.map({ .package(url: $0.0, branch: $0.1) }),
+  dependencies: dependencies.map({
+    if isDevelopment {
+      return .package(path: "../\($0.0)")
+    } else {
+      return .package(url: "https://github.com/fang-ling/\($0.0)", branch: $0.1)
+    }
+  }),
   targets: [
     .target(
-      name: "UIFramework",
+      name: "UIKit",
       dependencies: [
-        .product(name: "AnimationFramework", package: "animation-framework"),
-        .product(name: "FoundationFramework", package: "foundation-framework"),
-        .product(
-          name: "JavaScriptBridgeFramework",
-          package: "javascript-bridge-framework"
-        )
+        .product(name: "CKit", package: "c-kit"),
+        .product(name: "CoreAnimationKit", package: "core-animation-kit"),
+        .product(name: "CoreFoundationKit", package: "core-foundation-kit"),
+        .product(name: "FoundationKit", package: "foundation-kit"),
+        .product(name: "JavaScriptCoreKit", package: "javascript-core-kit"),
+        .product(name: "ObjectiveCKit", package: "objective-c-kit")
       ],
-      swiftSettings: [
-        .enableExperimentalFeature("Extern")
+      publicHeadersPath: "Includes",
+      cSettings: [
+        .unsafeFlags(["-fobjc-runtime=objfw-1.5"], .when(platforms: [.wasi])),
+        .unsafeFlags(["-fobjc-arc"])
       ]
     ),
     .executableTarget(
-      name: "UIFrameworkExample",
+      name: "UIKitExample",
       dependencies: [
-        "UIFramework"
+        .product(name: "CKit", package: "c-kit"),
+        "UIKit"
+      ],
+      publicHeadersPath: "Includes",
+      cSettings: [
+        .unsafeFlags(["-fobjc-runtime=objfw-1.5"], .when(platforms: [.wasi])),
+        .unsafeFlags(["-fobjc-arc"])
       ]
     )
   ]
