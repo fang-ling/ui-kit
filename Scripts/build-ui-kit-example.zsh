@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 ##
-##  build-ui-framework-example.zsh
+##  build-ui-kit-example.zsh
 ##  ui-framework
 ##
 ##  Created by Fang Ling on 2026/3/15.
@@ -21,21 +21,23 @@
 
 set -euo pipefail
 
-SWIFT=~"/.swiftly/bin/swift"
-SWIFT_SDK="DEVELOPMENT-SNAPSHOT-2026-03-09-a-wasm32-unknown-wasip1-threads"
-SWIFT_BRIDGING_HEADER="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"
+SWIFT_VERSION="swift-6.3-RELEASE.xctoolchain"
+SWIFT=~"/Library/Developer/Toolchains/${SWIFT_VERSION}/usr/bin/swift"
+SWIFT_SDK="6.3-RELEASE-wasm32-unknown-wasip1-threads"
 
 $SWIFT build \
   -c release \
   --swift-sdk $SWIFT_SDK \
-  -Xswiftc -static-stdlib \
+  -Xswiftc -cross-module-optimization \
   -Xswiftc -Xclang-linker \
   -Xswiftc -mexec-model=reactor \
-  -Xlinker --export-if-defined=__main_argc_argv \
-  -Xcc -I$SWIFT_BRIDGING_HEADER
+  -Xlinker --allow-undefined \
+  -Xlinker --export-if-defined=main
 
-cp ../javascript-bridge-framework/Resources/JavaScriptBridge.js Resources
+cp ../javascript-core-kit/Resources/JavaScriptCoreKit.js Resources
 
-echo "  - Local: http://localhost:3000/Resources/UIFrameworkExample.html"
+echo "  - Local: http://localhost:3000/Resources/UIKitExample.html"
 
 python3 -m http.server 3000
+
+#  --experimental-lto-mode full
