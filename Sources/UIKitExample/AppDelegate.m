@@ -46,26 +46,12 @@ C_ASSUME_NONNULL_END
 
 //@available(macOS 13.3.0, *)
 //class MainViewController: ViewController {
-//  lazy var label = Label(frame: .init(x: 36, y: 48, width: 360, height: 480))
 //  lazy var button = Button(type: .system)
 //
 //  override func viewDidLoad() {
 //    super.viewDidLoad()
 //
-//    setupLabel()
 //    setupButton()
-//  }
-//
-//  func setupLabel() {
-////    label.translatesAutoresizingMaskIntoConstraints = false
-//    label.text = String("Hello, 🌍!")
-//
-//    view.addSubview(label)
-//
-////    LayoutConstraint.activate([
-////      label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-////      label.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50)
-////    ])
 //  }
 //
 //  func setupButton() {
@@ -85,16 +71,5 @@ C_ASSUME_NONNULL_END
 ////      button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 ////      button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50)
 ////    ])
-//  }
-//}
-//
-//@available(macOS 13.3.0, *)
-//@main @MainActor final class AppDelegate: ApplicationDelegate {
-//  func applicationDidFinishLaunching() {
-
-//  }
-//
-//  static func main() {
-//    ApplicationMain(delegate: AppDelegate())
 //  }
 //}

@@ -50,7 +50,7 @@ C_ASSUME_NONNULL_BEGIN
 }
 
 + (Class)layerClass {
-  return [CoreAnimationDivisionLayer class];
+  return CoreAnimationDivisionLayer.class;
 }
 
 - (CBoolean)needsDisplay {
@@ -132,42 +132,28 @@ C_ASSUME_NONNULL_BEGIN
 
 - (void)displayLayer:(CoreAnimationLayer*)layer {
   if (self.isHidden) {
-    let property = [FoundationString makeStringWithCString:"visibility"];
-    let value = [FoundationString makeStringWithCString:"hidden"];
     [JavaScriptCoreContext updateNode:layer.contents
-                        styleProperty:property
-                           styleValue:value];
+                        styleProperty:@"visibility"
+                           styleValue:@"hidden"];
   } else {
-    let property = [FoundationString makeStringWithCString:"visibility"];
-    let value = [FoundationString makeStringWithCString:"visible"];
     [JavaScriptCoreContext updateNode:layer.contents
-                        styleProperty:property
-                           styleValue:value];
+                        styleProperty:@"visibility"
+                           styleValue:@"visible"];
   }
 
   /* Apply the frame. */
-  let property = [FoundationString makeStringWithCString:"left"];
-  let value =
-    [FoundationString makeStringWithFormat:"%fpx", self.frame.origin.x];
   [JavaScriptCoreContext updateNode:layer.contents
-                      styleProperty:property
-                         styleValue:value];
-  property = [FoundationString makeStringWithCString:"top"];
-  value = [FoundationString makeStringWithFormat:"%fpx", self.frame.origin.y];
+                      styleProperty:@"left"
+                         styleValue:$(@"%fpx", self.frame.origin.x)];
   [JavaScriptCoreContext updateNode:layer.contents
-                      styleProperty:property
-                         styleValue:value];
-  property = [FoundationString makeStringWithCString:"width"];
-  value = [FoundationString makeStringWithFormat:"%fpx", self.frame.size.width];
+                      styleProperty:@"top"
+                         styleValue:$(@"%fpx", self.frame.origin.y)];
   [JavaScriptCoreContext updateNode:layer.contents
-                      styleProperty:property
-                         styleValue:value];
-  property = [FoundationString makeStringWithCString:"height"];
-  value =
-    [FoundationString makeStringWithFormat:"%fpx", self.frame.size.height];
+                      styleProperty:@"width"
+                         styleValue:$(@"%fpx", self.frame.size.width)];
   [JavaScriptCoreContext updateNode:layer.contents
-                      styleProperty:property
-                         styleValue:value];
+                      styleProperty:@"height"
+                         styleValue:$(@"%fpx", self.frame.size.height)];
 }
 
 - (void)layoutSublayersOfLayer:(CoreAnimationLayer*)layer {

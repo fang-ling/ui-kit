@@ -24,13 +24,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
+    :root {
+      color-scheme: light dark;
+    }
+
     .view {
       position: absolute;
       box-sizing: border-box;
     }
 
     body {
-      background: black;
+      background: white;
       position: relative;
       margin: 0px;
     }
@@ -43,6 +47,12 @@
 
     p {
       margin: 0px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: black;
+      }
     }
   </style>
 </head>
@@ -57,12 +67,14 @@
     } from "/Resources/WASIShims.js"
     import {
       JavaScriptCoreInitialize,
-      JavaScriptCoreNodeInitializeDivisionNode,
       JavaScriptCoreWindowGetWidth,
       JavaScriptCoreWindowGetHeight,
+      JavaScriptCoreNodeInitializeDivisionNode,
+      JavaScriptCoreNodeInitializeParagraphNode,
       //JavaScriptBridge_MeasureTextSize,
-      JavaScriptCoreNodeUpdateStyleProperty,
       JavaScriptCoreNodeAddSubnode,
+      JavaScriptCoreNodeUpdateStyleProperty,
+      JavaScriptCoreNodeUpdateTextContent,
       //JavaScriptBridge_UpdateElementTextContent,
       //JavaScriptBridge_AddElementEventListener
     } from "/Resources/JavaScriptCoreKit.js"
@@ -89,12 +101,14 @@
         env: {
           memory,
           swift_addNewDSOImage: () => {},
-          JavaScriptCoreNodeInitializeDivisionNode,
           JavaScriptCoreWindowGetWidth,
           JavaScriptCoreWindowGetHeight,
+          JavaScriptCoreNodeInitializeDivisionNode,
+          JavaScriptCoreNodeInitializeParagraphNode,
           //JavaScriptBridge_MeasureTextSize,
-          JavaScriptCoreNodeUpdateStyleProperty,
           JavaScriptCoreNodeAddSubnode,
+          JavaScriptCoreNodeUpdateStyleProperty,
+          JavaScriptCoreNodeUpdateTextContent,
           //JavaScriptBridge_UpdateElementTextContent,
           //JavaScriptBridge_AddElementEventListener
         }
