@@ -19,12 +19,33 @@
 
 #import "ViewController.h"
 
+#import <CoreFoundationKit/CoreFoundationKit.h>
+
 C_ASSUME_NONNULL_BEGIN
+
+@interface ViewController()
+
+@property (nonatomic) UILabel* label;
+
+@end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+
+  [self setupLabel];
+}
+
+- (void)setupLabel {
+  self.label = [[UILabel alloc] initWithFrame:CoreFoundationRectangleMake(36,
+                                                                          48,
+                                                                          360,
+                                                                          480)];
+
+  self.label.text = @"Hello, world! 🌍";
+
+  [self.view addSubview:self.label];
 }
 
 @end

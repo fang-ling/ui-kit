@@ -22,6 +22,7 @@
 
 #import "../../LifeCycle/UIApplication.h"
 
+#import "../../UserInterface/UILabel.h"
 #import "../../UserInterface/UIScreen.h"
 #import "../../UserInterface/UIViewController.h"
 #import "../../UserInterface/UIWindow.h"
