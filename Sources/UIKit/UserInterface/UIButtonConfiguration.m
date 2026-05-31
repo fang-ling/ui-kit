@@ -1,8 +1,8 @@
 /*
- *  UIKit.h
+ *  UIButtonConfiguration.m
  *  ui-kit
  *
- *  Created by Fang Ling on 2026/5/17.
+ *  Created by Fang Ling on 2026/5/31.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,19 +17,16 @@
  *  limitations under the License.
  */
 
-#ifndef UIKit_h
-#define UIKit_h
+#import "UIButtonConfiguration.h"
 
-#import "../../LifeCycle/UIApplication.h"
+C_ASSUME_NONNULL_BEGIN
 
-#import "../../UserInteractions/UIAction.h"
+@implementation UIButtonConfiguration
 
-#import "../../UserInterface/UIButton.h"
-#import "../../UserInterface/UIButtonConfiguration.h"
-#import "../../UserInterface/UIControl.h"
-#import "../../UserInterface/UILabel.h"
-#import "../../UserInterface/UIScreen.h"
-#import "../../UserInterface/UIViewController.h"
-#import "../../UserInterface/UIWindow.h"
++ (instancetype)makePlainButtonConfiguration {
+  return [[UIButtonConfiguration alloc] init];
+}
 
-#endif /* UIKit_h */
+@end
+
+C_ASSUME_NONNULL_END

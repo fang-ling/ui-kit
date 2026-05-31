@@ -40,7 +40,7 @@ C_ASSUME_NONNULL_BEGIN
     return nil;
   }
 
-  self.layer = [[UIView.layerClass alloc] init];
+  self.layer = [[self.class.layerClass alloc] init];
   self.layer.delegate = self;
 
   self.frame = frame;

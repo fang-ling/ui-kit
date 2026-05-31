@@ -69,14 +69,14 @@
       JavaScriptCoreInitialize,
       JavaScriptCoreWindowGetWidth,
       JavaScriptCoreWindowGetHeight,
+      JavaScriptCoreNodeInitializeButtonNode,
       JavaScriptCoreNodeInitializeDivisionNode,
       JavaScriptCoreNodeInitializeParagraphNode,
       //JavaScriptBridge_MeasureTextSize,
+      JavaScriptCoreNodeAddClickEventListener,
       JavaScriptCoreNodeAddSubnode,
       JavaScriptCoreNodeUpdateStyleProperty,
-      JavaScriptCoreNodeUpdateTextContent,
-      //JavaScriptBridge_UpdateElementTextContent,
-      //JavaScriptBridge_AddElementEventListener
+      JavaScriptCoreNodeUpdateTextContent
     } from "/Resources/JavaScriptCoreKit.js"
 
     const wasi = new WASI(
@@ -103,14 +103,14 @@
           swift_addNewDSOImage: () => {},
           JavaScriptCoreWindowGetWidth,
           JavaScriptCoreWindowGetHeight,
+          JavaScriptCoreNodeInitializeButtonNode,
           JavaScriptCoreNodeInitializeDivisionNode,
           JavaScriptCoreNodeInitializeParagraphNode,
           //JavaScriptBridge_MeasureTextSize,
+          JavaScriptCoreNodeAddClickEventListener,
           JavaScriptCoreNodeAddSubnode,
           JavaScriptCoreNodeUpdateStyleProperty,
-          JavaScriptCoreNodeUpdateTextContent,
-          //JavaScriptBridge_UpdateElementTextContent,
-          //JavaScriptBridge_AddElementEventListener
+          JavaScriptCoreNodeUpdateTextContent
         }
       }
     )

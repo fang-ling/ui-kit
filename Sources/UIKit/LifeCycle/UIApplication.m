@@ -19,7 +19,49 @@
 
 #import "UIApplication.h"
 
+#import <CoreAnimationKit/CoreAnimationKit.h>
+
 C_ASSUME_NONNULL_BEGIN
+
+static UIControl* UIApplicationFindControlWithTarget(
+  UIView* view,
+  CUnsignedInteger32 target
+) {
+  if ([view isKindOfClass:UIControl.class]) {
+    let control = (UIControl*)view;
+    if (control.layer.contents == target) {
+      return control;
+    }
+  }
+
+  /* TODO: Use fast enumeration. */
+  for (let i = 0; i < view.subviews.count; i += 1) {
+    let found = UIApplicationFindControlWithTarget(
+      [view.subviews objectAtIndex:i],
+      target
+    );
+    if (found) {
+      return found;
+    }
+  }
+
+  return nil;
+}
+
+void UIKitDispatchControlEvent(
+  CUnsignedInteger32 target,
+  CUnsignedInteger32 eventType
+) {
+  [[UIApplication sharedApplication] sendEventToTarget:target
+                                      forControlEvents:eventType];
+
+  /*
+   * TODO: Async jobs that mutate UI state after the event returns must trigger
+   * their own flush to render the deferred updates.
+   */
+  let layer = [UIApplication sharedApplication].keyWindow.layer;
+  [CoreAnimationTransaction flushWithLayer:layer];
+}
 
 @interface UIApplication()
 
@@ -45,6 +87,20 @@ C_ASSUME_NONNULL_BEGIN
   return nil;
 }
 
+- (void)sendEventToTarget:(CUnsignedInteger32)target
+         forControlEvents:(UIControlEvents)controlEvents {
+  /* TODO: Use fast enumeration. */
+  for (let i = 0; i < self.windows.count; i += 1) {
+    let window = (UIWindow*)[self.windows objectAtIndex:i];
+    let control = UIApplicationFindControlWithTarget(window, target);
+    if (control) {
+      [control sendActionsForControlEvents:controlEvents];
+
+      return;
+    }
+  }
+}
+
 + (UIApplication*)sharedApplication {
   static let sharedApplication = (UIApplication*)nil;
 
@@ -58,58 +114,6 @@ C_ASSUME_NONNULL_BEGIN
 @end
 
 C_ASSUME_NONNULL_END
-//@available(macOS 13.3.0, *)
-//@MainActor public class Application: Responder {
-//  /// Dispatches an event to the appropriate responder objects in the app.
-//  ///
-//  /// - Parameter target: The object to receive the action message. If target is
-//  ///   `nil`, the app sends the message to the first responder, from whence it
-//  ///   progresses up the responder chain until it is handled.
-//  func sendEvent(
-//    to targetPointer: UnsafePointer<Integer32>, // TODO: UUID
-//    targetPointerCount: UnsignedInteger64,
-//    for event: Control.Event
-//  ) {
-//    func isEqual(
-//      _ lhs: String,
-//      _ rhs: UnsafePointer<Integer32>,
-//      _ rhsCount: UnsignedInteger64
-//    ) -> BinaryLogic {
-//      if lhs.count == rhsCount {
-//        for i in 0 ..< Int(rhsCount) {
-//          if lhs.charactersView[i] != rhs[i] {
-//            return false
-//          }
-//        }
-//
-//        return true
-//      }
-//
-//      return false
-//    }
-//
-//    func walkTree(view: View, perform action: (View) -> Void) {
-//      for subview in view.subviews {
-//        // TODO: Make UUID conforms to Equatable
-//        if isEqual(
-//          subview.layer.contents.uuidString,
-//          targetPointer,
-//          targetPointerCount
-//        ) {
-//          action(subview)
-//        }
-//
-//        walkTree(view: subview, perform: action)
-//      }
-//    }
-//
-//    for window in Application.shared.windows {
-//      walkTree(view: window) { view in
-//        (view as? Control)?.sendActions(for: event)
-//      }
-//    }
-//  }
-//}
 
 void UIApplicationMain(CString delegateClassName) {
   let delegateClass = ObjectiveCLookUpClass(delegateClassName);
@@ -122,22 +126,3 @@ void UIApplicationMain(CString delegateClassName) {
   let layer = UIApplication.sharedApplication.keyWindow.layer;
   [CoreAnimationTransaction flushWithLayer:layer];
 }
-
-//@_expose(wasm, "UIFramework_DispatchElementEvent")
-//@_cdecl("UIFramework_DispatchElementEvent")
-//@available(macOS 13.3.0, *)
-//@MainActor func UIFramework_DispatchElementEvent(
-//  elementIDString: UnsafePointer<Integer32>,
-//  elementIDStringCount: UnsignedInteger64,
-//  eventType: UnsignedInteger32
-//) {
-//  Application.shared.sendEvent(
-//    to: elementIDString,
-//    targetPointerCount: elementIDStringCount,
-//    for: .init(rawValue: eventType)
-//  )
-//
-//  // TODO: Support async event
-//
-//  Transaction.flush(Application.shared.keyWindow?.layer)
-//}
