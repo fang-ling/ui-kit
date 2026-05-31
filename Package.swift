@@ -67,6 +67,7 @@ let package = Package(
       name: "UIKitExample",
       dependencies: [
         .product(name: "CKit", package: "c-kit"),
+        .product(name: "CoreFoundationKit", package: "core-foundation-kit"),
         "UIKit"
       ],
       publicHeadersPath: "Includes",

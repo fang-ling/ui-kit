@@ -27,6 +27,8 @@ C_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) UILabel* label;
 
+@property (nonatomic) UIButton* button;
+
 @end
 
 @implementation ViewController
@@ -35,6 +37,7 @@ C_ASSUME_NONNULL_BEGIN
   [super viewDidLoad];
 
   [self setupLabel];
+  [self setupButton];
 }
 
 - (void)setupLabel {
@@ -46,6 +49,29 @@ C_ASSUME_NONNULL_BEGIN
   self.label.text = @"Hello, world! 🌍";
 
   [self.view addSubview:self.label];
+}
+
+- (void)setupButton {
+  let configuration = [UIButtonConfiguration makePlainButtonConfiguration];
+  configuration.title = @"Tap Me";
+
+  @weakify(self)
+  let action = [UIAction makeActionWithIdentifier:nil
+                                          handler:^(UIAction* action) {
+    @strongify(self)
+
+    [self buttonDidTap];
+  }];
+
+  self.button = [UIButton makeButtonWithConfiguration:configuration
+                                        primaryAction:action];
+  self.button.frame = CoreFoundationRectangleMake(36, 58, 360, 580);
+
+  [self.view addSubview:self.button];
+}
+
+- (void)buttonDidTap {
+  self.label.text = @"Button was tapped! 🎉";
 }
 
 @end

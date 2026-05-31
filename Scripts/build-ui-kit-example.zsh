@@ -32,7 +32,8 @@ $SWIFT build \
   -Xswiftc -Xclang-linker \
   -Xswiftc -mexec-model=reactor \
   -Xlinker --allow-undefined \
-  -Xlinker --export-if-defined=main
+  -Xlinker --export=main \
+  -Xlinker --export=UIKitDispatchControlEvent
 
 cp ../javascript-core-kit/Resources/JavaScriptCoreKit.js Resources
 

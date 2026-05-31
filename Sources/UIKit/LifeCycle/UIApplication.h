@@ -17,13 +17,14 @@
  *  limitations under the License.
  */
 
-#import <CKit/CKit.h>
-#import <FoundationKit/FoundationKit.h>
-
 #import "../UserInteractions/UIResponder.h"
+#import "../UserInterface/UIControl.h"
 #import "../UserInterface/UIWindow.h"
 
 #import "UIApplicationDelegate.h"
+
+#import <CKit/CKit.h>
+#import <FoundationKit/FoundationKit.h>
 
 C_ASSUME_NONNULL_BEGIN
 
@@ -69,6 +70,23 @@ C_ASSUME_NONNULL_BEGIN
  * recently sent the ``makeKeyAndVisible`` message.
  */
 @property (nonatomic, readonly) UIWindow* keyWindow;
+
+/**
+ * Sends an action message to a specified target with the specified events.
+ *
+ * Normally, this method is invoked by a ``UIControl`` object that the user has
+ * touched. The default implementation dispatches the action method to the given
+ * target object. Subclasses may override this method to perform special
+ * dispatching of action messages.
+ *
+ * - Parameters:
+ *   - target: The object to receive the action message.
+ *   - controlEvents: A bit-mask with flags that specify the control events for
+ *     which the control sends action messages. See ``UIControlEvents`` for
+ *     bit-mask constants.
+ */
+- (void)sendEventToTarget:(CUnsignedInteger32)target
+         forControlEvents:(UIControlEvents)controlEvents;
 
 @end
 
