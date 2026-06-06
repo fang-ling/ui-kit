@@ -25,6 +25,8 @@ C_ASSUME_NONNULL_BEGIN
 
 @interface ViewController()
 
+@property (nonatomic) UIImageView* imageView;
+
 @property (nonatomic) UILabel* label;
 
 @property (nonatomic) UIButton* button;
@@ -36,8 +38,21 @@ C_ASSUME_NONNULL_BEGIN
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  [self setupImageView];
   [self setupLabel];
   [self setupButton];
+}
+
+- (void)setupImageView {
+  let configuration =
+    [UIImageSymbolConfiguration makeConfigurationWithPointSize:24.0];
+  let image = [UIImage makeImageWithSystemName:@"rectangle.stack.fill"
+                                 configuration:configuration];
+
+  self.imageView = [UIImageView makeImageViewWithImage:image];
+  self.imageView.frame = CoreFoundationRectangleMake(36, 24, 360, 240);
+
+  [self.view addSubview:self.imageView];
 }
 
 - (void)setupLabel {
