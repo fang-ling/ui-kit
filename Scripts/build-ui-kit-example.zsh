@@ -2,7 +2,7 @@
 
 ##
 ##  build-ui-kit-example.zsh
-##  ui-framework
+##  ui-kit
 ##
 ##  Created by Fang Ling on 2026/3/15.
 ##
@@ -26,6 +26,7 @@ SWIFT=~"/Library/Developer/Toolchains/${SWIFT_VERSION}/usr/bin/swift"
 SWIFT_SDK="6.3-RELEASE-wasm32-unknown-wasip1-threads"
 
 $SWIFT build \
+  --package-path Examples \
   -c release \
   --swift-sdk $SWIFT_SDK \
   -Xswiftc -cross-module-optimization \
@@ -35,7 +36,7 @@ $SWIFT build \
   -Xlinker --export=main \
   -Xlinker --export=UIKitDispatchControlEvent
 
-cp ../javascript-core-kit/Resources/JavaScriptCoreKit.js Resources
+cp ../javascript-core-kit/Resources/*.js Resources/Assets/JavaScripts/
 
 echo "  - Local: http://localhost:3000/Resources/UIKitExample.html"
 

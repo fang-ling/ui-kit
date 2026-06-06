@@ -1,7 +1,7 @@
 <!--
 --
---  UIKitExample.html
---  ui-framework
+--  EntryPoint.html
+--  ui-kit
 --
 --  Created by Fang Ling on 2026/3/22.
 --
@@ -73,7 +73,7 @@
       OpenFile,
       File,
       ConsoleStdout
-    } from "/Resources/WASIShims.js"
+    } from "/Resources/Assets/JavaScripts/WASIShims.js"
     import {
       JavaScriptCoreInitialize,
       JavaScriptCoreWindowGetWidth,
@@ -88,7 +88,7 @@
       JavaScriptCoreNodeUpdateClassName,
       JavaScriptCoreNodeUpdateStyleProperty,
       JavaScriptCoreNodeUpdateTextContent
-    } from "/Resources/JavaScriptCoreKit.js"
+    } from "/Resources/Assets/JavaScripts/JavaScriptCoreKit.js"
 
     const wasi = new WASI(
       [],
@@ -106,7 +106,7 @@
       shared: true
     })
     const { instance } = await WebAssembly.instantiateStreaming(
-      fetch("/.build/release/UIKitExample.wasm"),
+      fetch("/Examples/.build/release/UIKitExample.wasm"),
       {
         wasi_snapshot_preview1: wasi.wasiImport,
         env: {

@@ -1,6 +1,6 @@
 /*
  *  ViewController.m
- *  ui-kit
+ *  ui-kit-examples
  *
  *  Created by Fang Ling on 2026/5/17.
  *

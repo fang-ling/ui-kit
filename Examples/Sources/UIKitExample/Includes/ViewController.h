@@ -1,6 +1,6 @@
 /*
- *  main.m
- *  ui-kit
+ *  ViewController.h
+ *  ui-kit-examples
  *
  *  Created by Fang Ling on 2026/5/17.
  *
@@ -17,10 +17,13 @@
  *  limitations under the License.
  */
 
+#import <CKit/CKit.h>
 #import <UIKit/UIKit.h>
 
-int main() {
-  UIApplicationMain("AppDelegate");
+C_ASSUME_NONNULL_BEGIN
 
-  return 0;
-}
+@interface ViewController: UIViewController
+
+@end
+
+C_ASSUME_NONNULL_END

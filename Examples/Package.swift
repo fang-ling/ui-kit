@@ -2,9 +2,9 @@
 
 //
 //  Package.swift
-//  ui-kit
+//  ui-kit-examples
 //
-//  Created by Fang Ling on 2025/12/28.
+//  Created by Fang Ling on 2026/6/6.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -21,39 +21,16 @@
 
 import PackageDescription
 
-let isDevelopment = false
-
-let dependencies = [
-  ("c-kit", "main"),
-  ("core-animation-kit", "main"),
-  ("core-foundation-kit", "main"),
-  ("foundation-kit", "main"),
-  ("javascript-core-kit", "main"),
-  ("objective-c-kit", "main")
-]
-
 let package = Package(
-  name: "ui-kit",
-  products: [
-    .library(name: "UIKit", targets: ["UIKit"])
+  name: "ui-kit-examples",
+  dependencies: [
+    .package(path: "../")
   ],
-  dependencies: dependencies.map({
-    if isDevelopment {
-      return .package(path: "../\($0.0)")
-    } else {
-      return .package(url: "https://github.com/fang-ling/\($0.0)", branch: $0.1)
-    }
-  }),
   targets: [
-    .target(
-      name: "UIKit",
+    .executableTarget(
+      name: "UIKitExample",
       dependencies: [
-        .product(name: "CKit", package: "c-kit"),
-        .product(name: "CoreAnimationKit", package: "core-animation-kit"),
-        .product(name: "CoreFoundationKit", package: "core-foundation-kit"),
-        .product(name: "FoundationKit", package: "foundation-kit"),
-        .product(name: "JavaScriptCoreKit", package: "javascript-core-kit"),
-        .product(name: "ObjectiveCKit", package: "objective-c-kit")
+        .product(name: "UIKit", package: "ui-kit")
       ],
       publicHeadersPath: "Includes",
       cSettings: [

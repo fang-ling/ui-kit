@@ -1,6 +1,6 @@
 /*
- *  ViewController.h
- *  ui-kit
+ *  AppDelegate.h
+ *  ui-kit-examples
  *
  *  Created by Fang Ling on 2026/5/17.
  *
@@ -22,7 +22,7 @@
 
 C_ASSUME_NONNULL_BEGIN
 
-@interface ViewController: UIViewController
+@interface AppDelegate: UIResponder <UIApplicationDelegate>
 
 @end
 

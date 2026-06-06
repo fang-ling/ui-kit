@@ -1,6 +1,6 @@
 /*
- *  AppDelegate.h
- *  ui-kit
+ *  main.m
+ *  ui-kit-examples
  *
  *  Created by Fang Ling on 2026/5/17.
  *
@@ -17,13 +17,10 @@
  *  limitations under the License.
  */
 
-#import <CKit/CKit.h>
 #import <UIKit/UIKit.h>
 
-C_ASSUME_NONNULL_BEGIN
+int main() {
+  UIApplicationMain("AppDelegate");
 
-@interface AppDelegate: UIResponder <UIApplicationDelegate>
-
-@end
-
-C_ASSUME_NONNULL_END
+  return 0;
+}
