@@ -1,8 +1,8 @@
 /*
- *  ViewController.h
+ *  UIImageView.m
  *  ui-kit
  *
- *  Created by Fang Ling on 2026/5/17.
+ *  Created by Fang Ling on 2026/6/6.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,12 +17,27 @@
  *  limitations under the License.
  */
 
-#import <CKit/CKit.h>
-#import <UIKit/UIKit.h>
+#import "UIImageView.h"
+
+#import "UIImage+Private.h"
+#import "UISymbolImageView.h"
 
 C_ASSUME_NONNULL_BEGIN
 
-@interface ViewController: UIViewController
+@implementation UIImageView
+
++ (instancetype)makeImageViewWithImage:(UIImage*)image {
+  if (image.type == kUIImageTypeSymbol) {
+    return [[_UISymbolImageView alloc] initWithImage:image];
+  }
+
+  let imageView =
+    [[UIImageView alloc] initWithFrame:CoreFoundationRectangleMake(0, 0, 0, 0)];
+
+  imageView.image = image;
+
+  return imageView;
+}
 
 @end
 

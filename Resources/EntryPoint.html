@@ -1,22 +1,22 @@
 <!--
-//
-//  UIKitExample.html
-//  ui-framework
-//
-//  Created by Fang Ling on 2026/3/22.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
+--
+--  EntryPoint.html
+--  ui-kit
+--
+--  Created by Fang Ling on 2026/3/22.
+--
+--  Licensed under the Apache License, Version 2.0 (the "License");
+--  you may not use this file except in compliance with the License.
+--  You may obtain a copy of the License at
+--
+--    http://www.apache.org/licenses/LICENSE-2.0
+--
+--  Unless required by applicable law or agreed to in writing, software
+--  distributed under the License is distributed on an "AS IS" BASIS,
+--  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+--  See the License for the specific language governing permissions and
+--  limitations under the License.
+--
   -->
 <!DOCTYPE html>
 <head>
@@ -24,6 +24,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
+    @font-face {
+      font-family: "UIKit SF Pro";
+      src: url("/Resources/Assets/Fonts/SF-Pro.ttf") format("truetype");
+    }
+
     :root {
       color-scheme: light dark;
     }
@@ -31,6 +36,10 @@
     .view {
       position: absolute;
       box-sizing: border-box;
+    }
+
+    .sfSymbol {
+      font-family: "UIKit SF Pro";
     }
 
     body {
@@ -64,7 +73,7 @@
       OpenFile,
       File,
       ConsoleStdout
-    } from "/Resources/WASIShims.js"
+    } from "/Resources/Assets/JavaScripts/WASIShims.js"
     import {
       JavaScriptCoreInitialize,
       JavaScriptCoreWindowGetWidth,
@@ -72,12 +81,14 @@
       JavaScriptCoreNodeInitializeButtonNode,
       JavaScriptCoreNodeInitializeDivisionNode,
       JavaScriptCoreNodeInitializeParagraphNode,
+      JavaScriptCoreNodeInitializeSpanNode,
       //JavaScriptBridge_MeasureTextSize,
       JavaScriptCoreNodeAddClickEventListener,
       JavaScriptCoreNodeAddSubnode,
+      JavaScriptCoreNodeUpdateClassName,
       JavaScriptCoreNodeUpdateStyleProperty,
       JavaScriptCoreNodeUpdateTextContent
-    } from "/Resources/JavaScriptCoreKit.js"
+    } from "/Resources/Assets/JavaScripts/JavaScriptCoreKit.js"
 
     const wasi = new WASI(
       [],
@@ -95,7 +106,7 @@
       shared: true
     })
     const { instance } = await WebAssembly.instantiateStreaming(
-      fetch("/.build/release/UIKitExample.wasm"),
+      fetch("/Examples/.build/release/UIKitExample.wasm"),
       {
         wasi_snapshot_preview1: wasi.wasiImport,
         env: {
@@ -106,9 +117,11 @@
           JavaScriptCoreNodeInitializeButtonNode,
           JavaScriptCoreNodeInitializeDivisionNode,
           JavaScriptCoreNodeInitializeParagraphNode,
+          JavaScriptCoreNodeInitializeSpanNode,
           //JavaScriptBridge_MeasureTextSize,
           JavaScriptCoreNodeAddClickEventListener,
           JavaScriptCoreNodeAddSubnode,
+          JavaScriptCoreNodeUpdateClassName,
           JavaScriptCoreNodeUpdateStyleProperty,
           JavaScriptCoreNodeUpdateTextContent
         }

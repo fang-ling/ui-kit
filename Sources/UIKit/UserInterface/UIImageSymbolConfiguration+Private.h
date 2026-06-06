@@ -1,8 +1,8 @@
 /*
- *  main.m
+ *  UIImageSymbolConfiguration+Private.h
  *  ui-kit
  *
- *  Created by Fang Ling on 2026/5/17.
+ *  Created by Fang Ling on 2026/6/6.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
  *  limitations under the License.
  */
 
-#import <UIKit/UIKit.h>
+#import "UIImageSymbolConfiguration.h"
 
-int main() {
-  UIApplicationMain("AppDelegate");
+@interface UIImageSymbolConfiguration()
 
-  return 0;
-}
+@property (nonatomic) CFloatingPoint pointSize;
+
+@end
