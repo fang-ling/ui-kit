@@ -27,6 +27,7 @@
 #import "../../UserInterface/UIButton.h"
 #import "../../UserInterface/UIButtonConfiguration.h"
 #import "../../UserInterface/UIControl.h"
+#import "../../UserInterface/UIGeometry.h"
 #import "../../UserInterface/UIImage.h"
 #import "../../UserInterface/UIImageConfiguration.h"
 #import "../../UserInterface/UIImageSymbolConfiguration.h"

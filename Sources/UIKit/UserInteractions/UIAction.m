@@ -31,12 +31,11 @@ C_ASSUME_NONNULL_BEGIN
 
 @implementation UIAction
 
-+ (UIAction*)makeActionWithIdentifier:(nullable FoundationString*)identifier
-                              handler:(UIActionHandler)handler {
++ (UIAction*)makeActionWithHandler:(UIActionHandler)handler {
   let action = [[UIAction alloc] init];
 
   /* TODO: Switch to UUID. */
-  action.identifier = identifier ?: $(@"com.example.action-%d", arc4random());
+  action.identifier = $(@"com.example.action-%d", arc4random());
 
   action.handler = handler;
 
