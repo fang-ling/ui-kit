@@ -26,7 +26,7 @@ SWIFT=~"/Library/Developer/Toolchains/${SWIFT_VERSION}/usr/bin/swift"
 SWIFT_SDK="6.3-RELEASE-wasm32-unknown-wasip1-threads"
 
 $SWIFT build \
-  --package-path Examples \
+  --package-path Examples/ui-kit-example \
   -c release \
   --swift-sdk $SWIFT_SDK \
   -Xswiftc -cross-module-optimization \
@@ -36,7 +36,7 @@ $SWIFT build \
   -Xlinker --export=main \
   -Xlinker --export=UIKitDispatchControlEvent
 
-cp ../javascript-core-kit/Resources/*.js Resources/Assets/JavaScripts/
+cp ../javascript-core-kit/Resources/*.js Resources/JavaScripts/
 
 echo "  - Local: http://localhost:3000/Resources/EntryPoint.html"
 

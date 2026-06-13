@@ -26,7 +26,7 @@
   <style>
     @font-face {
       font-family: "UIKit SF Pro";
-      src: url("/Resources/Assets/Fonts/SF-Pro.ttf") format("truetype");
+      src: url("/Resources/Fonts/SF-Pro.ttf") format("truetype");
     }
 
     :root {
@@ -73,7 +73,7 @@
       OpenFile,
       File,
       ConsoleStdout
-    } from "/Resources/Assets/JavaScripts/WASIShims.js"
+    } from "/Resources/JavaScripts/WASIShims.js"
     import {
       JavaScriptCoreInitialize,
       JavaScriptCoreWindowGetWidth,
@@ -88,7 +88,7 @@
       JavaScriptCoreNodeUpdateClassName,
       JavaScriptCoreNodeUpdateStyleProperty,
       JavaScriptCoreNodeUpdateTextContent
-    } from "/Resources/Assets/JavaScripts/JavaScriptCoreKit.js"
+    } from "/Resources/JavaScripts/JavaScriptCoreKit.js"
 
     const wasi = new WASI(
       [],
@@ -106,7 +106,7 @@
       shared: true
     })
     const { instance } = await WebAssembly.instantiateStreaming(
-      fetch("/Examples/.build/release/UIKitExample.wasm"),
+      fetch("/Examples/ui-kit-example/.build/release/UIKitExample.wasm"),
       {
         wasi_snapshot_preview1: wasi.wasiImport,
         env: {

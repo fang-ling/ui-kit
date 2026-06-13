@@ -41,17 +41,13 @@ typedef void (^UIActionHandler)(UIAction*);
 @property (nonatomic, readonly) FoundationString* identifier;
 
 /**
- * Creates an action with the specified identifier and handler.
+ * Creates an action with the automatically generated identifier and handler.
  *
- * - Parameters:
- *   - identifier: The unique identifier for the action. Specify `nil` to let
- *     this method create a unique identifier.
- *   - handler: The handler to invoke after a person selects the action. This
- *     handler has the following parameter:
- *       - action: The action that a person selects.
+ * - Parameter handler: The handler to invoke after a person selects the action.
+ *   This handler has the following parameter:
+ *     - action: The action that a person selects.
  */
-+ (UIAction*)makeActionWithIdentifier:(nullable FoundationString*)identifier
-                              handler:(UIActionHandler)handler;
++ (UIAction*)makeActionWithHandler:(UIActionHandler)handler;
 
 @end
 
