@@ -20,6 +20,7 @@
 #import "UIImageConfiguration.h"
 
 #import <CKit/CKit.h>
+#import <CoreFoundationKit/CoreFoundationKit.h>
 #import <FoundationKit/FoundationKit.h>
 #import <ObjectiveCKit/ObjectiveCKit.h>
 
@@ -90,6 +91,11 @@ C_ASSUME_NONNULL_BEGIN
  * - ``makeImageWithURL:``
  * - ``makeImageWithSystemName:``
  * - ``makeImageWithSystemName:configuration``
+ *
+ * ### Getting the image size and scale
+ *
+ * - ``scale``
+ * - ``size``
  */
 @interface UIImage: ObjectiveCObject
 
@@ -111,6 +117,28 @@ C_ASSUME_NONNULL_BEGIN
  * ``UIImageSymbolConfiguration`` object.
  */
 @property (nonatomic, copy, readonly) UIImageConfiguration* configuration;
+
+/**
+ * The scale factor of the image.
+ *
+ * If you load an image from a file whose name includes the `@2x` modifier, the
+ * scale is set to `2.0`. All other images are assumed to have a scale factor of
+ * `1.0`.
+ *
+ * If you multiply the logical size of the image (stored in the ``size``
+ * property) by the value in this property, you get the dimensions of the image
+ * in pixels.
+ */
+@property (nonatomic, readonly) CFloatingPoint scale;
+
+/**
+ * The logical dimensions, in points, for the image.
+ *
+ * This value reflects the logical size of the image and takes the image's
+ * current orientation into account. Multiply the size values by the value in
+ * the ``scale`` property to get the pixel dimensions of the image.
+ */
+@property (nonatomic, readonly) CoreFoundationSize size;
 
 /**
  * Creates an image object that contains a system symbol image.

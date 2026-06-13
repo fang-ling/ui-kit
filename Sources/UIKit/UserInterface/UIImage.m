@@ -20,6 +20,9 @@
 #import "UIImage.h"
 
 #import "UIImage+Private.h"
+#import "UIImageSymbolConfiguration+Private.h"
+
+#import <JavaScriptCoreKit/JavaScriptCoreKit.h>
 
 C_ASSUME_NONNULL_BEGIN
 
@@ -47,6 +50,19 @@ C_ASSUME_NONNULL_BEGIN
   image.type = kUIImageTypeSymbol;
   image.content = content;
   image.configuration = configuration;
+  image.scale = 1.0;
+
+  let styleText = (FoundationString*)@"font-family: 'UIKit SF Pro'";
+
+  if (configuration &&
+      [configuration isKindOfClass:UIImageSymbolConfiguration.class]) {
+    let symbolConfig = (UIImageSymbolConfiguration*)configuration;
+
+    styleText = $(@"%@; font-size: %fpt", styleText, symbolConfig.pointSize);
+  }
+
+  image.size = [JavaScriptCoreContext measureTextSize:content
+                                            styleText:styleText];
 
   return image;
 }

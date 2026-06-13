@@ -38,7 +38,7 @@ $SWIFT build \
 
 cp ../javascript-core-kit/Resources/*.js Resources/Assets/JavaScripts/
 
-echo "  - Local: http://localhost:3000/Resources/UIKitExample.html"
+echo "  - Local: http://localhost:3000/Resources/EntryPoint.html"
 
 python3 -m http.server 3000
 
