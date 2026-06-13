@@ -17,9 +17,9 @@
  *  limitations under the License.
  */
 
-#import "../UserInteractions/UIResponder.h"
-#import "../UserInterface/UIControl.h"
-#import "../UserInterface/UIWindow.h"
+#import "../User Interactions/UIResponder.h"
+#import "../User Interface/UIControl.h"
+#import "../User Interface/UIWindow.h"
 
 #import "UIApplicationDelegate.h"
 

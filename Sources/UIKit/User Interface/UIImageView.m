@@ -19,8 +19,8 @@
 
 #import "UIImageView.h"
 
-#import "UIImage+Private.h"
 #import "UISymbolImageView.h"
+#import "../Graphics/UIImage+Private.h"
 
 C_ASSUME_NONNULL_BEGIN
 

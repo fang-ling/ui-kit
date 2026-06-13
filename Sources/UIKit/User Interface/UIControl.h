@@ -18,7 +18,7 @@
  */
 
 #import "UIView.h"
-#import "../UserInteractions/UIAction.h"
+#import "../User Interactions/UIAction.h"
 
 #import <CKit/CKit.h>
 

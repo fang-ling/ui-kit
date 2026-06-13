@@ -18,8 +18,8 @@
  */
 
 #import "UIGeometry.h"
-#import "UIImage.h"
-#import "UIImageSymbolConfiguration.h"
+#import "../Graphics/UIImage.h"
+#import "../Graphics/UIImageSymbolConfiguration.h"
 
 #import <CKit/CKit.h>
 #import <FoundationKit/FoundationKit.h>

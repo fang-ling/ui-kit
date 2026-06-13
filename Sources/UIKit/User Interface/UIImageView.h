@@ -17,8 +17,8 @@
  *  limitations under the License.
  */
 
-#import "UIImage.h"
 #import "UIView.h"
+#import "../Graphics/UIImage.h"
 
 C_ASSUME_NONNULL_BEGIN
 

@@ -19,8 +19,8 @@
 
 #import "UIButton.h"
 
-#import "UILabel.h"
 #import "UIImageView.h"
+#import "../Text/UILabel.h"
 
 #import <CoreAnimationKit/CoreAnimationKit.h>
 

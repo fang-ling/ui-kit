@@ -19,8 +19,8 @@
 
 #import "UISymbolImageView.h"
 
-#import "UIImage+Private.h"
-#import "UIImageSymbolConfiguration+Private.h"
+#import "../Graphics/UIImage+Private.h"
+#import "../Graphics/UIImageSymbolConfiguration+Private.h"
 
 #import <CoreAnimationKit/CoreAnimationKit.h>
 #import <JavaScriptCoreKit/JavaScriptCoreKit.h>

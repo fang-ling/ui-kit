@@ -21,7 +21,7 @@
 
 #import <JavaScriptCoreKit/JavaScriptCoreKit.h>
 
-#import "../LifeCycle/UIApplication.h"
+#import "../Life Cycle/UIApplication.h"
 
 C_ASSUME_NONNULL_BEGIN
 

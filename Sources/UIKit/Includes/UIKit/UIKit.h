@@ -18,23 +18,25 @@
  */
 
 #ifndef UIKit_h
-#define UIKit_h
+#define UIKit_hGraphics
 
-#import "../../LifeCycle/UIApplication.h"
+#import "../../Graphics/UIImage.h"
+#import "../../Graphics/UIImageConfiguration.h"
+#import "../../Graphics/UIImageSymbolConfiguration.h"
 
-#import "../../UserInteractions/UIAction.h"
+#import "../../Life Cycle/UIApplication.h"
 
-#import "../../UserInterface/UIButton.h"
-#import "../../UserInterface/UIButtonConfiguration.h"
-#import "../../UserInterface/UIControl.h"
-#import "../../UserInterface/UIGeometry.h"
-#import "../../UserInterface/UIImage.h"
-#import "../../UserInterface/UIImageConfiguration.h"
-#import "../../UserInterface/UIImageSymbolConfiguration.h"
-#import "../../UserInterface/UIImageView.h"
-#import "../../UserInterface/UILabel.h"
-#import "../../UserInterface/UIScreen.h"
-#import "../../UserInterface/UIViewController.h"
-#import "../../UserInterface/UIWindow.h"
+#import "../../Text/UILabel.h"
+
+#import "../../User Interactions/UIAction.h"
+
+#import "../../User Interface/UIButton.h"
+#import "../../User Interface/UIButtonConfiguration.h"
+#import "../../User Interface/UIControl.h"
+#import "../../User Interface/UIGeometry.h"
+#import "../../User Interface/UIImageView.h"
+#import "../../User Interface/UIScreen.h"
+#import "../../User Interface/UIViewController.h"
+#import "../../User Interface/UIWindow.h"
 
 #endif /* UIKit_h */

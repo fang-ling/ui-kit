@@ -20,7 +20,7 @@
 #import <CKit/CKit.h>
 #import <ObjectiveCKit/ObjectiveCKit.h>
 
-#import "../UserInteractions/UIResponder.h"
+#import "../User Interactions/UIResponder.h"
 
 #import "UIView.h"
 

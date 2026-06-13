@@ -17,7 +17,7 @@
  *  limitations under the License.
  */
 
-#import "../UserInteractions/UIResponder.h"
+#import "../User Interactions/UIResponder.h"
 
 #import <CKit/CKit.h>
 #import <CoreAnimationKit/CoreAnimationKit.h>
