@@ -47,4 +47,8 @@ typedef enum UIImageType {
 
 @property (nonatomic, copy, readwrite) UIImageConfiguration* configuration;
 
+@property (nonatomic, readwrite) CFloatingPoint scale;
+
+@property (nonatomic, readwrite) CoreFoundationSize size;
+
 @end
