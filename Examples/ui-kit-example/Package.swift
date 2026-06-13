@@ -2,7 +2,7 @@
 
 //
 //  Package.swift
-//  ui-kit-examples
+//  ui-kit-example
 //
 //  Created by Fang Ling on 2026/6/6.
 //
@@ -22,9 +22,9 @@
 import PackageDescription
 
 let package = Package(
-  name: "ui-kit-examples",
+  name: "ui-kit-example",
   dependencies: [
-    .package(path: "../")
+    .package(path: "../../")
   ],
   targets: [
     .executableTarget(
