@@ -16,6 +16,10 @@ device. You can also customize accessibility support, and localize your app's in
 
 ## Topics
 
+### User Interface
+
+- <doc:Windows-and-Screens>
+
 ### User Interactions
 
 - <doc:Touches-Presses-and-Gestures>
