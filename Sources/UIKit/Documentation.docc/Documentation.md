@@ -19,6 +19,7 @@ device. You can also customize accessibility support, and localize your app's in
 ### User Interface
 
 - <doc:Views-and-Controls>
+- <doc:View-Controllers>
 - <doc:Windows-and-Screens>
 
 ### User Interactions
