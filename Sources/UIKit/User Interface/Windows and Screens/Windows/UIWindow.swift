@@ -34,7 +34,7 @@ import CoreGraphicsKit
 ///
 ///   - Setting the z-axis level of your window, which affects the visibility of the window relative to other windows.
 ///   - Showing windows and making them the target of keyboard events.
-///   - Converting coordinate values to and from the window’s coordinate system.
+///   - Converting coordinate values to and from the window's coordinate system.
 ///   - Changing the root view controller of a window.
 ///   - Changing the screen on which the window is displayed.
 ///
