@@ -13,6 +13,10 @@ additional windows as needed.
 
 ## Topics
 
+### Windows
+
+- ``UIKit/UIWindow``
+
 ### Screens
 
 - ``UIKit/UIScreen``
