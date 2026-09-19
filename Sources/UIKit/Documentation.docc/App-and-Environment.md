@@ -18,4 +18,5 @@ to detect whether Dark Mode is active for the current view or view controller.
 
 ### Life Cycle
 
+- ``UIKit/UIApplication``
 - ``UIKit/UIApplicationDelegate``
