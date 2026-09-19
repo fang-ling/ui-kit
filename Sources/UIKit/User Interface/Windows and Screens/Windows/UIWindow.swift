@@ -16,7 +16,9 @@
 //
 //===----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------===//
 
+import CKit
 import CoreGraphicsKit
+import JavaScriptCoreKit
 
 /// The backdrop for your app's user interface and the object that dispatches events to your views.
 ///
@@ -62,6 +64,7 @@ import CoreGraphicsKit
 ///
 /// ### Making windows key
 ///
+/// - ``isKeyWindow``
 /// - ``makeKeyAndVisible()``
 @MainActor
 open class UIWindow: UIView {
@@ -88,7 +91,14 @@ open class UIWindow: UIView {
     }
   }
 
+  /// A Boolean value that indicates whether the window is the key window.
+  ///
+  /// The key window receives keyboard and other non-touch-related events. Only one window at a time may be the key window.
+  public private(set) var isKeyWindow: CBoolean
+
   public override init(frame: CoreGraphicsRectangle) {
+    self.isKeyWindow = false
+
     super.init(frame: frame)
 
     self.isHidden = true
@@ -99,10 +109,14 @@ open class UIWindow: UIView {
   /// This is a convenience method to show the current window and position it in front of all other windows at the same level or lower. If you only want to show the window, change its
   /// ``UIView/isHidden`` property to `false`.
   public func makeKeyAndVisible() {
+    for window in UIApplication.shared.windows {
+      window.isKeyWindow = false
+    }
     UIApplication.shared.windows.append(self)
 
     self.isHidden = false
+    self.isKeyWindow = true
 
-    // FIXME: [JavaScriptCoreNode.documentNode addSubnode:self.layer.contents];
+    JavaScriptCoreViewElement.body.addSubviewElement(self.layer._viewElement)
   }
 }
