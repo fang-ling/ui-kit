@@ -16,6 +16,10 @@ device. You can also customize accessibility support, and localize your app's in
 
 ## Topics
 
+### App Structure
+
+- <doc:App-and-Environment>
+
 ### User Interface
 
 - <doc:Views-and-Controls>
