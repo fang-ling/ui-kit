@@ -35,6 +35,10 @@
 ///
 /// ## Topics
 ///
+/// ### Creating a responder
+///
+/// - ``init()``
+///
 /// ### Managing the responder chain
 ///
 /// - ``next``
@@ -49,4 +53,9 @@ open class UIResponder {
   open var next: UIResponder? {
     return nil
   }
+
+  /// Creates a new responder object.
+  ///
+  /// The default implementation does nothing; subclasses can override this method to perform whatever actions are necessary.
+  public init() {}
 }
