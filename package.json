@@ -1,0 +1,17 @@
+{
+  "name": "@fangling/ui-kit",
+  "license": "Apache-2.0",
+  "scripts": {
+    "compile": "tsc",
+    "bundle": "esbuild .build/build/UIKit/UIKit.js --bundle --minify --keep-names --format=esm --outdir=.build/bundle",
+    "build": "npm run compile && npm run bundle"
+  },
+  "type": "module",
+  "dependencies": {
+    "@fangling/java-script-core-kit": "1.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2"
+  }
+}
