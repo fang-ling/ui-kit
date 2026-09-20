@@ -1,35 +1,34 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.3
 
+//===----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------===//
 //
 //  Package.swift
 //  ui-kit
 //
 //  Created by Fang Ling on 2025/12/28.
 //
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
+//  This source file is part of the UIKit open source project
 //
-//    http://www.apache.org/licenses/LICENSE-2.0
+//  Copyright (c) 2025-2026 Fang Ling <fangling@fangl.ing>
+//  Licensed under Apache License v2.0
 //
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
+//  See LICENSE for license information
 //
+//  SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------===//
 
 import PackageDescription
 
 let isDevelopment = false
 
 let dependencies = [
-  ("c-kit", "main"),
-  ("core-animation-kit", "main"),
-  ("core-foundation-kit", "main"),
-  ("foundation-kit", "main"),
-  ("javascript-core-kit", "main"),
-  ("objective-c-kit", "main")
+  ("c-kit", "CKit", "main"),
+  ("core-animation-kit", "CoreAnimationKit", "main"),
+  ("core-foundation-kit", "CoreFoundationKit", "main"),
+  ("core-graphics-kit", "CoreGraphicsKit", "main"),
+  ("foundation-kit", "FoundationKit", "main"),
+  ("java-script-core-kit", "JavaScriptCoreKit", "main")
 ]
 
 let package = Package(
@@ -37,33 +36,11 @@ let package = Package(
   products: [
     .library(name: "UIKit", targets: ["UIKit"])
   ],
-  dependencies: dependencies.map({
-    if isDevelopment {
-      return .package(path: "../\($0.0)")
-    } else {
-      return .package(url: "https://github.com/fang-ling/\($0.0)", branch: $0.1)
-    }
-  }),
+  dependencies: dependencies.map { isDevelopment ? .package(path: "../\($0.0)") : .package(url: "https://github.com/fang-ling/\($0.0)", branch: $0.2) },
   targets: [
     .target(
       name: "UIKit",
-      dependencies: [
-        .product(name: "CKit", package: "c-kit"),
-        .product(name: "CoreAnimationKit", package: "core-animation-kit"),
-        .product(name: "CoreFoundationKit", package: "core-foundation-kit"),
-        .product(name: "FoundationKit", package: "foundation-kit"),
-        .product(name: "JavaScriptCoreKit", package: "javascript-core-kit"),
-        .product(name: "ObjectiveCKit", package: "objective-c-kit")
-      ],
-      publicHeadersPath: "Includes",
-      cSettings: [
-        .unsafeFlags(["-fobjc-runtime=objfw-1.5"], .when(platforms: [.wasi])),
-        .unsafeFlags([
-          "-fobjc-arc",
-          "-fno-constant-cfstrings",
-          "-fconstant-string-class=_FoundationConstantString"
-        ])
-      ]
+      dependencies: dependencies.map { .product(name: $0.1, package: $0.0) }
     )
   ]
 )

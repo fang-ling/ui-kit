@@ -1,0 +1,22 @@
+---
+BasedOnStyle: LLVM
+ColumnLimit: 180
+
+AllowShortFunctionsOnASingleLine: Empty
+AllowAllArgumentsOnNextLine: false
+AlignAfterOpenBracket: Align
+AlwaysBreakAfterReturnType: None
+
+BinPackArguments: false
+BinPackParameters: false
+
+DerivePointerAlignment: false
+
+ObjCSpaceAfterProperty: true
+
+PenaltyReturnTypeOnItsOwnLine: 200
+PointerAlignment: Left
+
+SpaceBeforeInheritanceColon: false
+
+...
