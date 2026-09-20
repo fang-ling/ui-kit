@@ -8,9 +8,3 @@ DerivedData/
 .netrc
 
 Package.resolved
-Resources/Fonts/SF-Pro.ttf
-Resources/JavaScripts/JavaScriptCoreKit.js
-Resources/JavaScripts/WASIShims.js
-
-Examples/ui-kit-example/.swiftpm
-Examples/ui-kit-example/.build
