@@ -7,3 +7,4 @@ Simplify interactions with your app using menu systems, contextual menus, Home S
 ### Menu Elements and Keyboard Shortcuts
 
 - ``UIKit/UIMenuElement``
+- ``UIKit/UIMenuLeaf``
