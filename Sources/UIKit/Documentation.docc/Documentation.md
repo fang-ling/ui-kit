@@ -30,3 +30,7 @@ device. You can also customize accessibility support, and localize your app's in
 
 - <doc:Touches-Presses-and-Gestures>
 - <doc:Menus-and-Shortcuts>
+
+### Graphics, Drawing, and Printing
+
+- <doc:Images-and-PDF>
