@@ -27,36 +27,4 @@ const UIFontWeight kUIFontWeightRegular = 400;
 
 const UIFontWeight kUIFontWeightMedium = 510;
 
-@interface UIFont ()
-
-@property (nonatomic, readwrite) CFloatingPoint pixelSize;
-
-@property (nonatomic, readwrite) CFloatingPoint lineHeight;
-
-@end
-
-@implementation UIFont
-
-+ (instancetype)makeSystemFontOfSize:(CFloatingPoint)fontSize {
-  return [UIFont makeSystemFontOfSize:fontSize weight:kUIFontWeightRegular];
-}
-
-+ (instancetype)makeSystemFontOfSize:(CFloatingPoint)fontSize
-                              weight:(UIFontWeight)weight {
-  let font = [[UIFont alloc] init];
-
-  font.pixelSize = fontSize;
-  font.weight = weight;
-
-  if (fontSize == 10.0) {
-    font.lineHeight = 11.933594;
-  } else if (fontSize == 17) {
-    font.lineHeight = 20.287109;
-  }
-
-  return font;
-}
-
-@end
-
 C_ASSUME_NONNULL_END
