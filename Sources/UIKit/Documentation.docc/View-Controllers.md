@@ -20,3 +20,7 @@ container view controllers to implement new navigation schemes.
 ### Content View Controllers
 
 - ``UIKit/UIViewController``
+
+### Container View Controllers
+
+- ``UIKit/UITab``
