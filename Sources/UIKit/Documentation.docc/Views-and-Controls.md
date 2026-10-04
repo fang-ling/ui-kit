@@ -26,6 +26,10 @@ for user interactions.
 
 - ``UIKit/UIView``
 
+### Content Views
+
+- ``UIKit/UIImageView``
+
 ### Text Views
 
 - ``UIKit/UILabel``
