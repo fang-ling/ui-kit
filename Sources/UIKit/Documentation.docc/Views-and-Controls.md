@@ -33,3 +33,7 @@ for user interactions.
 ### Text Views
 
 - ``UIKit/UILabel``
+
+### Bars
+
+- ``UIKit/UIBarItem``
