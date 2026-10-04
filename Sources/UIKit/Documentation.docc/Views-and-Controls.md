@@ -42,3 +42,7 @@ for user interactions.
 ### Bars
 
 - ``UIKit/UIBarItem``
+
+### Related Types
+
+- ``UIKit/UIDirectionalRectangleEdge``
