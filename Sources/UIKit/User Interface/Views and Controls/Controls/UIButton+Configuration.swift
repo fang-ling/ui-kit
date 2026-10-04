@@ -84,7 +84,7 @@ extension UIButton {
     /// Creates a configuration for a button with a transparent background.
     ///
     /// - Returns: A new configuration object.
-    public static func plain() -> UIButton.Configuration {
+    public static func plain() -> Configuration {
       return Configuration(imagePadding: 0, imagePlacement: .all)
     }
   }
