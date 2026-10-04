@@ -16,6 +16,8 @@
 //
 //===----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------===//
 
+#if !os(iOS)
+
 import CKit
 import CoreAnimationKit
 import CoreGraphicsKit
@@ -319,6 +321,19 @@ open class UIView: UIResponder {
     self.frame = frame
   }
 
+  internal init(frame: CoreGraphicsRectangle, layerClass: CoreAnimationLayer.Type) {
+    self.layer = layerClass.init()
+    self.subviews = []
+
+    super.init()
+
+    self.layer.delegate = self
+
+    //  self.contentMode = kUIViewContentModeScaleToFill;
+
+    self.frame = frame
+  }
+
   /// Adds a view to the end of the view's list of subviews.
   ///
   /// This method establishes a strong reference to view and sets its next responder to the view, which is its new superview.
@@ -425,6 +440,8 @@ extension UIView: @MainActor CoreAnimationLayerDelegate {
     self.layoutSubviews()
   }
 }
+
+#endif
 
 //@implementation UIView
 //
