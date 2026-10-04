@@ -23,4 +23,5 @@ container view controllers to implement new navigation schemes.
 
 ### Container View Controllers
 
+- ``UIKit/UITabBarController``
 - ``UIKit/UITab``
