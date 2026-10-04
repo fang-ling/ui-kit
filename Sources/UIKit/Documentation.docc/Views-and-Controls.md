@@ -33,6 +33,7 @@ for user interactions.
 ### Controls
 
 - ``UIKit/UIControl``
+- ``UIKit/UIButton``
 
 ### Text Views
 
