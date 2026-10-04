@@ -22,32 +22,6 @@
 C_ASSUME_NONNULL_BEGIN
 
 /**
- * Constants that indicate which weight variant of a symbol image to use.
- *
- * The definition of a symbol image includes multiple scale and weight variants.
- * The weight variants offer a way to progressively thicken some or all of the
- * image's lines. Weights do not correspond to a specific line thickness.
- *
- * ## Topics
- *
- * ### Symbol image weights
- *
- * - ``kUIImageSymbolWeightRegular``
- * - ``kUIImageSymbolWeightMedium``
- */
-typedef enum UIImageSymbolWeight {
-  /**
-   * A regular weight.
-   */
-  kUIImageSymbolWeightRegular = 400,
-
-  /**
-   * A medium weight.
-   */
-  kUIImageSymbolWeightMedium = 510
-} UIImageSymbolWeight;
-
-/**
  * An object that contains the specific font, size, style, and weight attributes
  * to apply to a symbol image.
  *
