@@ -16,6 +16,10 @@
 //
 //===----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------===//
 
+#if !os(iOS)
+
+import SwiftFramework
+
 /// An abstract interface for responding to and handling events.
 ///
 /// Responder objects — instances of ``UIResponder`` — constitute the event-handling backbone of a UIKit app. Many key objects are also responders, including the ``UIApplication`` object,
@@ -42,6 +46,13 @@
 /// ### Managing the responder chain
 ///
 /// - ``next``
+///
+/// ### Responding to touch events
+///
+/// - ``touchesBegan(_:with:)``
+/// - ``touchesMoved(_:with:)``
+/// - ``touchesEnded(_:with:)``
+/// - ``touchesCancelled(_:with:)``
 @MainActor
 open class UIResponder {
   /// The next responder in the responder chain, or `nil` if there's no next responder.
@@ -58,4 +69,85 @@ open class UIResponder {
   ///
   /// The default implementation does nothing; subclasses can override this method to perform whatever actions are necessary.
   public init() {}
+
+  /// Tells this object that one or more new touches occurred in a view or window.
+  ///
+  /// UIKit calls this method when a new touch is detected in a view or window. Many UIKit classes override this method and use it to handle the corresponding touch events. The default implementation
+  /// of this method forwards the message up the responder chain. When creating your own subclasses, call `super` to forward any events that you don't handle yourself, like in the following code.
+  ///
+  ///    ```swift
+  ///    super.touchesBegan(touches, with: event)
+  ///    ```
+  ///
+  /// If you override this method without calling `super` (a common use pattern), you must also override the other methods for handling touch events, even if your implementations do nothing.
+  ///
+  /// - Parameters:
+  ///   - touches: A set of ``UITouch`` instances that represent the touches for the starting phase of the event, which is represented by event. For touches in a view, this set contains only one touch
+  ///     by default. To receive multiple touches, you must set the view's ``isMultipleTouchEnabled`` property to `true`.
+  ///   - event: The event to which the touches belong.
+  public func touchesBegan(_ touches: SwiftSet<UITouch>, with event: UIEvent?) {
+    self.next?.touchesBegan(touches, with: event)
+  }
+
+  /// Tells the responder when one or more touches associated with an event changed.
+  ///
+  /// UIKit calls this method when the location or force of a touch changes. Many UIKit classes override this method and use it to handle the corresponding touch events. The default implementation of
+  /// this method forwards the message up the responder chain. When creating your own subclasses, call `super` to forward any events that you don't handle yourself, like in the following code.
+  ///
+  ///    ```swift
+  ///    super.touchesMoved(touches, with: event)
+  ///    ```
+  ///
+  /// If you override this method without calling `super` (a common use pattern), you must also override the other methods for handling touch events, even if your implementations do nothing.
+  ///
+  /// - Parameters:
+  ///   - touches: A set of ``UITouch`` instances that represent the touches whose values changed. These touches all belong to the specified event. For touches in a view, this set contains only one
+  ///     touch by default. To receive multiple touches, you must set the view's ``isMultipleTouchEnabled`` property to `true`.
+  ///   - event: The event to which the touches belong.
+  public func touchesMoved(_ touches: SwiftSet<UITouch>, with event: UIEvent?) {
+    self.next?.touchesMoved(touches, with: event)
+  }
+
+  /// Tells the responder when one or more fingers are raised from a view or window.
+  ///
+  /// UIKit calls this method when a finger or Apple Pencil is no longer touching the screen. Many UIKit classes override this method and use it to clean up state involved in the handling of the
+  /// corresponding touch events. The default implementation of this method forwards the message up the responder chain. When creating your own subclasses, call `super` to forward any events that you
+  /// don't handle yourself, like in the following code.
+  ///
+  ///    ```swift
+  ///    super.touchesEnded(touches, with: event)
+  ///    ```
+  ///
+  /// If you override this method without calling `super` (a common use pattern), you must also override the other methods for handling touch events, even if your implementations do nothing.
+  ///
+  /// - Parameters:
+  ///   - touches: A set of ``UITouch`` instances that represent the touches for the ending phase of the event represented by event. For touches in a view, this set contains only one touch by default.
+  ///     To receive multiple touches, you must set the view's ``isMultipleTouchEnabled`` property to `true`.
+  ///   - event: The event to which the touches belong.
+  public func touchesEnded(_ touches: SwiftSet<UITouch>, with event: UIEvent?) {
+    self.next?.touchesEnded(touches, with: event)
+  }
+
+  /// Tells the responder when a system event (such as a system alert) cancels a touch sequence.
+  ///
+  /// UIKit calls this method when it receives a system interruption requiring cancellation of the touch sequence. An interruption is anything that causes the application to become inactive or causes
+  /// the view handling the touch events to be removed from its window. Your implementation of this method should clean up any state associated with handling the touch sequence. The default
+  /// implementation of this method forwards the message up the responder chain. When creating your own subclasses, call `super` to forward any events that you don't handle yourself, like in the
+  /// following code.
+  ///
+  ///    ```swift
+  ///    super.touchesCancelled(touches, with: event)
+  ///    ```
+  ///
+  /// If you override this method without calling `super` (a common use pattern), you must also override the other methods for handling touch events, if only as stub (empty) implementations.
+  ///
+  /// - Parameters:
+  ///   - touches: A set of ``UITouch`` instances that represent the touches for the ending phase of the event represented by event. For touches in a view, this set contains only one touch by default.
+  ///     To receive multiple touches, you must set the view's ``isMultipleTouchEnabled`` property to `true`.
+  ///   - event: The event to which the touches belong.
+  public func touchesCancelled(_ touches: SwiftSet<UITouch>, with event: UIEvent?) {
+    self.next?.touchesCancelled(touches, with: event)
+  }
 }
+
+#endif
