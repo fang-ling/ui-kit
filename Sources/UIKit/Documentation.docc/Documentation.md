@@ -34,3 +34,4 @@ device. You can also customize accessibility support, and localize your app's in
 ### Graphics, Drawing, and Printing
 
 - <doc:Images-and-PDF>
+- <doc:Drawing>
