@@ -43,6 +43,7 @@ for user interactions.
 
 - ``UIKit/UIBarItem``
 - ``UIKit/UITabBar``
+- ``UIKit/UITabBarItem``
 
 ### Related Types
 
