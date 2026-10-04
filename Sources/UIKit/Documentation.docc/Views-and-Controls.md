@@ -25,3 +25,7 @@ for user interactions.
 ### View Fundamentals
 
 - ``UIKit/UIView``
+
+### Text Views
+
+- ``UIKit/UILabel``
