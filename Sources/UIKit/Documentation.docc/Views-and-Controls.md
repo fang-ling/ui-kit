@@ -30,6 +30,10 @@ for user interactions.
 
 - ``UIKit/UIImageView``
 
+### Controls
+
+- ``UIKit/UIControl``
+
 ### Text Views
 
 - ``UIKit/UILabel``
