@@ -115,7 +115,7 @@ public class UITabBarController: UIViewController, UITabBarDelegate {
         contentView.addSubview(viewController.view)
       }
 
-      self.tabBar.selectedItem = self.tabBar.items?.first(where: { $0._identifier == selectedTab?.identifier })
+      self.tabBar.selectedItem = self.tabBar.items?.first(where: { $0._identifier == self.selectedTab?.identifier })
     }
   }
 
