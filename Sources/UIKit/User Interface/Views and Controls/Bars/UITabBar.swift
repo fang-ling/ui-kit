@@ -112,6 +112,7 @@ public class UITabBar: UIView {
           configuration.image = items[index].image
           configuration.imagePlacement = .top
           configuration.imagePadding = 4
+          configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 17, weight: .medium)
 
           let button = UIButton(
             configuration: configuration,

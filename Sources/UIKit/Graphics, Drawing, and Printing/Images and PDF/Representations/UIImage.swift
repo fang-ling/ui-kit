@@ -20,6 +20,7 @@
 
 import CKit
 import CoreGraphicsKit
+import JavaScriptCoreKit
 import SwiftFramework
 
 /// An object that manages image data in your app.
@@ -173,7 +174,7 @@ public class UIImage {
 
     if let symbolConfiguration = configuration as? SymbolConfiguration {
       styleAttributes["font-size"] = "\(symbolConfiguration.pointSize)pt"
-      styleAttributes["font-weight"] = "\(symbolConfiguration.weight)"
+      styleAttributes["font-weight"] = "\(symbolConfiguration.weight.rawValue)"
     }
 
     self.size = symbolImageContent.size(withAttributes: styleAttributes)

@@ -223,13 +223,13 @@ public class UIButton: UIControl {
       if self._imageView == nil {
         let imageView = UIImageView(image: image)
         self._imageView = imageView
-        imageView.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 17, weight: .medium)
 
         self.addSubview(imageView)
       } else {
         self._imageView?.image = image
       }
 
+      self._imageView?.preferredSymbolConfiguration = self.configuration?.preferredSymbolConfigurationForImage
       //self._imageView.tintColor = configuration?.baseForegroundColor
     } else {
       self._imageView?.removeFromSuperview()
