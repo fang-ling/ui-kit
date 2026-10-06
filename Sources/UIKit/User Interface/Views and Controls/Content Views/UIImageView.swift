@@ -132,6 +132,10 @@ import CoreGraphicsKit
 ///
 /// - ``image``
 ///
+/// ### Configuring the image view
+///
+/// - ``tintColor``
+///
 /// ### Configuring the appearance of symbol images
 ///
 /// - ``preferredSymbolConfiguration``
@@ -149,6 +153,15 @@ public class UIImageView: UIView {
   /// This property is set to the image you specified at initialization time. If you did not use the ``init(image:)`` or ``init(image:highlightedImage:)`` method to initialize your image view, the
   /// initial value of this property is `nil`.
   public var image: UIImage? {
+    didSet {
+      self.setNeedsDisplay()
+    }
+  }
+
+  /// A color used to tint template images in the view hierarchy.
+  ///
+  /// The default is `nil`. If a non-`nil` value is specified, the color is applied to any template images attached to the image view.
+  public var tintColor: UIColor! {
     didSet {
       self.setNeedsDisplay()
     }
@@ -195,6 +208,10 @@ public class UIImageView: UIView {
         // Set the point size on the element directly; the layer's `fontSize` property emits `px` units.
         inlineTextLayer._viewElement.style.fontSize = "\(configuration.pointSize)pt"
         inlineTextLayer._fontWeight = CFloatingPoint64(configuration.weight.rawValue)
+      }
+
+      if let tintColor = self.tintColor {
+        inlineTextLayer.foregroundColor = tintColor.cgColor
       }
     }
   }
