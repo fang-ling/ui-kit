@@ -161,6 +161,7 @@ import FoundationKit
 ///
 /// ### Configuring a view's visual appearance
 ///
+/// - ``backgroundColor``
 /// - ``isHidden``
 /// - ``layerClass``
 /// - ``layer``
@@ -202,6 +203,23 @@ open class UIView: UIResponder {
   /// This method is called only once early in the creation of the view in order to create the corresponding layer object.
   open class var layerClass: CoreAnimationLayer.Type {
     return CoreAnimationLayer.self
+  }
+
+  /// The view's background color.
+  ///
+  /// Changes to this property can be animated. The default value is `nil`, which results in a transparent background color.
+  public var backgroundColor: UIColor? {
+    get {
+      if let name = self.layer.backgroundColor?._name {
+        return UIColor(named: name)
+      }
+
+      return nil
+    }
+
+    set {
+      self.layer.backgroundColor = newValue?.cgColor
+    }
   }
 
   /// A Boolean value that determines whether the view is hidden.
@@ -442,15 +460,3 @@ extension UIView: @MainActor CoreAnimationLayerDelegate {
 }
 
 #endif
-
-//@implementation UIView
-//
-//- (nullable UIColor*)backgroundColor {
-//  return self.layer.backgroundColor;
-//}
-//
-//- (void)setBackgroundColor:(nullable UIColor*)backgroundColor {
-//  self.layer.backgroundColor = backgroundColor;
-//}
-//
-//@end
