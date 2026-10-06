@@ -42,6 +42,7 @@ for user interactions.
 ### Visual Effects
 
 - ``UIKit/UIVisualEffect``
+- ``UIKit/UIVisualEffectView``
 - ``UIKit/UIBlurEffect``
 
 ### Bars
