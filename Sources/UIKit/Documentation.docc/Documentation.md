@@ -24,6 +24,7 @@ device. You can also customize accessibility support, and localize your app's in
 
 - <doc:Views-and-Controls>
 - <doc:View-Controllers>
+- <doc:Appearance-Customization>
 - <doc:Windows-and-Screens>
 
 ### User Interactions
