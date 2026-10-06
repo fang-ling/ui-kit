@@ -39,35 +39,4 @@ typedef enum UIBlurEffectStyle {
   kUIBlurEffectStyleSystemChromeMaterial
 } UIBlurEffectStyle;
 
-/**
- * An object that applies a blurring effect to the content layered behind a
- * visual effect view.
- *
- * Views that you add to the ``contentView`` of a visual effect view aren't
- * affected by the blur effect.
- *
- * ## Topics
- *
- * ### Creating a blur effect
- *
- * - ``makeEffectWithStyle:``
- *
- * ### Constants
- *
- * - ``UIBlurEffectStyle``
- */
-@interface UIBlurEffect: UIVisualEffect
-
-/**
- * Creates a blur effect with the designated style.
- *
- * - Parameter style: The intensity of the blur effect. See
- *   ``UIBlurEffectStyle`` for valid options.
- *
- * - Returns: The blur effect to be used by a ``UIVisualEffectView`` object.
- */
-+ (instancetype)makeEffectWithStyle:(UIBlurEffectStyle)style;
-
-@end
-
 C_ASSUME_NONNULL_END
