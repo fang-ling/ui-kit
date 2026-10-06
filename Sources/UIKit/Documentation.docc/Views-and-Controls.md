@@ -39,6 +39,10 @@ for user interactions.
 
 - ``UIKit/UILabel``
 
+### Visual Effects
+
+- ``UIKit/UIVisualEffect``
+
 ### Bars
 
 - ``UIKit/UIBarItem``
