@@ -4,6 +4,10 @@ Apply Liquid Glass to views, support Dark Mode in your app, customize the appear
 
 ## Topics
 
+### Tab Bar Appearance
+
+- ``UIKit/UITabBarAppearance``
+
 ### Shared Appearance
 
 - ``UIKit/UIBarAppearance``

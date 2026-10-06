@@ -17,13 +17,15 @@
  *===----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------===*/
 
 :root {
-  --AccentColor:        #007AFF;
-  --UnselectedTabColor: #999999;
+  --AccentColor:             #007AFF;
+  --UnselectedTabColor:      #999999;
+  --SystemChromeShadowColor: #0000004D;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --AccentColor:        #0A84FF;
-    --UnselectedTabColor: #7E7E7E;
+    --AccentColor:             #0A84FF;
+    --UnselectedTabColor:      #7E7E7E;
+    --SystemChromeShadowColor: #FFFFFF26;
   }
 }
