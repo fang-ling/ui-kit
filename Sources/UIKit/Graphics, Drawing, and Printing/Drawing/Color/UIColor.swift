@@ -18,6 +18,7 @@
 
 #if !os(iOS)
 
+import CoreGraphicsKit
 import SwiftFramework
 
 /// An object that stores color data and sometimes opacity.
@@ -37,6 +38,10 @@ import SwiftFramework
 ///
 /// - <doc:UI-Element-Colors>
 /// - <doc:Color-Creation>
+///
+/// ### Getting the color information
+///
+/// - ``cgColor``
 open class UIColor {
   internal var name: SwiftString
 
@@ -48,6 +53,17 @@ open class UIColor {
   /// A color value that resolves at runtime based on the current tint color of the app or trait hierarchy.
   public class var tintColor: UIColor {
     return UIColor(named: "color-accent")!
+  }
+
+  /// The Quartz color that corresponds to the color object.
+  ///
+  /// The color object in this property doesn't adapt automatically to Dark Mode changes. If you use it to set the color of interface elements, you must update that color yourself. You update that
+  /// color when the ``userInterfaceStyle`` trait of the current trait collection changes.
+  public var cgColor: CoreGraphicsColor {
+    let cgColor = CoreGraphicsColor._initialize()
+    cgColor._name = self.name
+
+    return cgColor
   }
 
   /// Creates a color object using the information from the named asset.
