@@ -113,6 +113,7 @@ public class UITabBar: UIView {
           configuration.imagePlacement = .top
           configuration.imagePadding = 4
           configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 17, weight: .medium)
+          configuration.baseForegroundColor = UIColor(named: "UnselectedTabColor")
 
           let button = UIButton(
             configuration: configuration,
