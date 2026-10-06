@@ -140,6 +140,10 @@ public class UILabel: UIView {
     set {
       self._textColor = newValue
 
+      if let layer = self.layer as? CoreAnimationTextLayer, let newValue {
+        layer.foregroundColor = newValue.cgColor
+      }
+
       self.setNeedsDisplay()
     }
   }
