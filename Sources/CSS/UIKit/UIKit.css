@@ -17,6 +17,10 @@
  *===----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------===*/
 
 :root {
+  --SystemChromeMaterialBackground: #FFFFFFBF;
+
+  --SystemChromeMaterialBackgroundBlendMode: hard-light;
+
   --AccentColor:             #007AFF;
   --UnselectedTabColor:      #999999;
   --SystemChromeShadowColor: #0000004D;
@@ -24,6 +28,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --SystemChromeMaterialBackground: #1C1C1CE6;
+
+    --SystemChromeMaterialBackgroundBlendMode: overlay;
+
     --AccentColor:             #0A84FF;
     --UnselectedTabColor:      #7E7E7E;
     --SystemChromeShadowColor: #FFFFFF26;

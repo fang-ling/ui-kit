@@ -78,6 +78,11 @@ import CoreGraphicsKit
 /// - ``items``
 /// - ``setItems(_:animated:)``
 /// - ``selectedItem``
+///
+/// ### Customizing tab bar appearance
+///
+/// - ``standardAppearance``
+/// - ``scrollEdgeAppearance``
 @MainActor
 public class UITabBar: UIView {
   /// The tab bar's delegate object.
@@ -168,6 +173,34 @@ public class UITabBar: UIView {
             buttonIndex += 1
           }
         }
+      }
+    }
+  }
+
+  /// The appearance settings for a standard-height tab bar.
+  ///
+  /// The default value of this property is an appearance object containing the system's default appearance settings.
+  public var standardAppearance: UITabBarAppearance = UITabBarAppearance()
+
+  /// The appearance settings for the tab bar when the edge of scrollable content aligns with the edge of the tab bar.
+  ///
+  /// When a tab bar controller contains a tab bar and a scroll view, part of the scroll view's content appears underneath the tab bar. If the edge of the scrolled content reaches that bar, UIKit
+  /// applies the appearance settings in this property.
+  ///
+  /// If the value of this property is `nil`, UIKit uses the value of the tab bar's ``standardAppearance`` property, modified to have a transparent background. If no tab bar controller manages your
+  /// tab bar, UIKit ignores this property and uses the tab bar's standard appearance.
+  ///
+  /// You can customize the appearance for specific tab bar items with the ``UITabBarItem/scrollEdgeAppearance`` property of ``UITabBarItem``.
+  public var scrollEdgeAppearance: UITabBarAppearance? {
+    didSet {
+      if let effect = self.scrollEdgeAppearance?.backgroundEffect {
+        let backgroundView = UIVisualEffectView(effect: effect)
+        backgroundView.frame = CoreGraphicsRectangle(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height)
+        self.insertSubview(backgroundView, at: 0)
+
+        let shadowView = UIView(frame: CoreGraphicsRectangle(x: 0, y: -0.333, width: self.bounds.size.width, height: 0.333))
+        shadowView.backgroundColor = self.scrollEdgeAppearance?.shadowColor
+        self.insertSubview(shadowView, at: 1)
       }
     }
   }
