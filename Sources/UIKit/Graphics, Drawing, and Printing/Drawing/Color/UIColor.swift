@@ -47,12 +47,12 @@ open class UIColor {
 
   /// The color for text labels that contain primary content.
   public class var label: UIColor {
-    return UIColor(named: "color-label-primary")!
+    return UIColor(named: "PrimaryLabelColor")!
   }
 
   /// A color value that resolves at runtime based on the current tint color of the app or trait hierarchy.
   public class var tintColor: UIColor {
-    return UIColor(named: "color-accent")!
+    return UIColor(named: "AccentColor")!
   }
 
   /// The Quartz color that corresponds to the color object.

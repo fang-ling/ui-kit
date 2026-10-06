@@ -160,7 +160,7 @@ public class UITabBar: UIView {
         for subview in self.subviews {
           if let button = subview as? UIButton {
             button.configurationUpdateHandler = { button in
-              button.configuration?.baseForegroundColor = buttonIndex == selectedIndex ? UIColor.tintColor : UIColor(named: "color-tab-unselected")
+              button.configuration?.baseForegroundColor = buttonIndex == selectedIndex ? UIColor.tintColor : UIColor(named: "UnselectedTabColor")
             }
             button.setNeedsUpdateConfiguration()
 
