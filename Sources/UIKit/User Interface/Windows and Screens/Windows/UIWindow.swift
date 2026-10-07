@@ -16,6 +16,8 @@
 //
 //===----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------===//
 
+#if !os(iOS)
+
 import CKit
 import CoreGraphicsKit
 import JavaScriptCoreKit
@@ -68,10 +70,6 @@ import JavaScriptCoreKit
 /// - ``makeKeyAndVisible()``
 @MainActor
 open class UIWindow: UIView {
-  public override var next: UIResponder? {
-    return UIApplication.shared
-  }
-
   /// The root view controller for the window.
   ///
   /// The root view controller provides the content view of the window. Assigning a view controller to this property installs the view controller's view as the content view of the window. The new
@@ -95,6 +93,10 @@ open class UIWindow: UIView {
   ///
   /// The key window receives keyboard and other non-touch-related events. Only one window at a time may be the key window.
   public private(set) var isKeyWindow: CBoolean
+
+  public override var next: UIResponder? {
+    return UIApplication.shared
+  }
 
   public override init(frame: CoreGraphicsRectangle) {
     self.isKeyWindow = false
@@ -120,3 +122,5 @@ open class UIWindow: UIView {
     JavaScriptCoreViewElement.body.addSubviewElement(self.layer._viewElement)
   }
 }
+
+#endif

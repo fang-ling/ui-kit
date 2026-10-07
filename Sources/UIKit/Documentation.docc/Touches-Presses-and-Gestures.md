@@ -12,3 +12,8 @@ content, you must handle all touch events that occur in your views.
 ### Essentials
 
 - ``UIKit/UIResponder``
+- ``UIKit/UIEvent``
+
+### Touches
+
+- ``UIKit/UITouch``

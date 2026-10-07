@@ -25,3 +25,32 @@ for user interactions.
 ### View Fundamentals
 
 - ``UIKit/UIView``
+
+### Content Views
+
+- ``UIKit/UIImageView``
+
+### Controls
+
+- ``UIKit/UIControl``
+- ``UIKit/UIButton``
+
+### Text Views
+
+- ``UIKit/UILabel``
+
+### Visual Effects
+
+- ``UIKit/UIVisualEffect``
+- ``UIKit/UIVisualEffectView``
+- ``UIKit/UIBlurEffect``
+
+### Bars
+
+- ``UIKit/UIBarItem``
+- ``UIKit/UITabBar``
+- ``UIKit/UITabBarItem``
+
+### Related Types
+
+- ``UIKit/UIDirectionalRectangleEdge``
